@@ -1,0 +1,25 @@
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+/*
+* Helper classes
+*/
+.center{
+	text-align: center;
+}
+
+#project-title{
+	font-family: 'Oleo Script', cursive;
+	font-weight: lighter;
+	color:#fff;
+	text-shadow: 1px 1px #000;
+	font-size: 28px;
+}
+
+.oleo {
+	font-family: 'Oleo Script', cursive;
+	font-weight: lighter;
+}
+
+.login-container{
+	width:400px;
+	margin:0 auto;
+}

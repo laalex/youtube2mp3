@@ -1,0 +1,170 @@
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+/*
+* Helper classes
+*/
+.center{
+  text-align: center;
+}
+.oleo {
+  font-family: 'Oleo Script', cursive !important;
+  font-weight: lighter;
+}
+#project-title{
+  font-family: 'Oleo Script', cursive;
+  font-weight: lighter;
+  color:#fff;
+  text-shadow: 1px 1px #000;
+  font-size: 28px;
+}
+/*
+ * Base structure - Bootstrap
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    padding: 70px 20px 20px;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-left: -20px;
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+}
+.nav-sidebar > li > a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  border-radius: 50%;
+}
+
+.closed {
+  display: none;
+}
+
+
+
+
+/*
+* Youtube - Video entry details
+*/
+.video-entry{
+  padding:10px;
+  border:1px solid #f4f4f4;
+  height:160px;
+  position: relative;
+  margin-bottom: 20px;
+  -webkit-transition: box-shadow 1s;
+  transition:box-shadow 1s;
+}
+
+.video-entry:hover{
+  box-shadow: 0px 0px 15px #f0f0f0;
+}
+.video-thumbnail{
+  width:15%;
+  height:125px;
+  float:left;
+  display: inline-block;
+}
+.video-thumbnail img{
+  width: 100%;height: 100%;
+}
+
+.video-details{
+  width: 85%;
+  float:left;
+  display: block;
+  padding-left:10px;
+}
+
+.video-progressbar-holder{
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right:0;
+  width:100%;
+  background: #f0f0f0;
+  display: block;
+  content:"";
+  height:10px;
+}
+
+.video-progressbar{
+  height: 10px;
+  float:left;
+  width:0%;
+  background: #FF851B;
+}
