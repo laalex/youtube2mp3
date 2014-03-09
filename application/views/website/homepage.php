@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#" id="project-title">-- PROJECT NAME --</a>
+    <a class="navbar-brand" href="#" id="project-title"><img src="<?php print base_url();?>assets/img/logo.png"></a>
   </div>
   <div class="navbar-collapse collapse">
     <?php echo form_open("auth/login",array('class'=>'navbar-form navbar-right'));?>
@@ -59,13 +59,24 @@
   </div>
   <br /><br />
 </div>
-
 <hr>
+<div class="container center">
+  <h1>Download the ZongList application for Android</h1>
+  <br />
+  <p>Get all your music to your mobile phone in one simple click. 
+  <br />
+  Click the button below and get started right away</p>
+  <br />
+  <a href="#"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-phone"></span>&nbsp;DOWNLOAD</div></a>
+</div>
+<hr>
+
+
 <div class="container">
 
   <div class="row">
     <div class="col-md-4">
-      <img src="http://cdn-static.cnet.co.uk/i/c/blg/cat/mobiles/android-logo-generic-hai.jpg" alt="" class="img-thumbnail">
+      <img src="<?php print base_url();?>assets/img/zonglist_splash.jpg" alt="" class="img-thumbnail">
     </div>
     <div class="col-md-8">
       <p><b>Use your account to download all the music to your phone</b></p>
@@ -95,17 +106,8 @@
 
 </div>
 <hr>
-<div class="container center">
-  <h1>Download the Android Application</h1>
-  <br />
-  <p>Get all your music to your mobile phone in one simple click. 
-  <br />
-  Click the button below and get started right away</p>
-  <br />
-  <a href="#"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-phone"></span>&nbsp;DOWNLOAD</div></a>
-</div>
-<hr>
+
 
 <footer class="container">
-  <p>&copy; MP3Droid 2014. A project by <a href="http://www.alexandrulamba.com" target="_blank">Alexandru Lamba</a></p>
+  <p>&copy; ZongList. A project by <a href="mailto:roshkattu94@gmail.com" target="_blank">Alexandru Lamba</a></p>
 </footer>

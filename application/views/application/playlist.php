@@ -19,7 +19,7 @@
 			  <div class="panel-body">
 			  
 			   <audio controls style="width:100%">
-					<source src="<?php print base_url();?>downloads/2/<?php print $song->song_name;?>" type="audio/mpeg">
+					<source src="<?php print base_url();?>downloads/<?php print $this->session->userdata('user_id'); ?>/<?php print $song->song_name;?>" type="audio/mpeg">
 					Your browser does not support HTML default MP3 player. Sorry for that. Please go ahead and download each song or the entire playlist.
 				</audio>
 			    <hr />

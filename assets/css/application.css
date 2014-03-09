@@ -16,6 +16,11 @@
   text-shadow: 1px 1px #000;
   font-size: 28px;
 }
+
+#project-title img {
+  height:30px;
+  margin-top:-5px;
+}
 /*
  * Base structure - Bootstrap
  */

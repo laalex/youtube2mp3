@@ -22,7 +22,10 @@ class download extends CI_Controller{
 		/* Get the hash */
 		$hash = $this->uri->segment(3);
 		//Get the user ID
-		//$uid = $this->session->userdata('user_id');
+		$uid = $this->session->userdata('user_id');
+		if($uid == null || empty($uid)){
+			$uid = $this->input->post('user_id');
+		}
 		//Get the database entry
 		$data = $this->db->where('download_url',$hash)->get('songs')->result();
 			if(!empty($data)):

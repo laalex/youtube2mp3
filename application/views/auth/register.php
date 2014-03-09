@@ -1,7 +1,8 @@
 <div class="container center">
   <br /><br />
 
-    <h1 class="oleo">Create a new account</h1>  
+    <h1 class="oleo">Create a new account</h1> 
+
 
     <br />
 
@@ -34,5 +35,7 @@
 
 
     </div>
+
+
 
 </div>

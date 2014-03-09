@@ -85,7 +85,7 @@
       $cmd = escapeshellcmd($cmd);
       system($cmd);
       //File converted. Remove the mp4 file
-      unlink($fpath);
+      @unlink($fpath);
       //Return the file name
       print json_encode(array('file_name'=>$file.'.mp3'));
     }

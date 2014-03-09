@@ -14,6 +14,11 @@
 	font-size: 28px;
 }
 
+#project-title img {
+	height:30px;
+	margin-top:-5px;
+}
+
 .oleo {
 	font-family: 'Oleo Script', cursive;
 	font-weight: lighter;

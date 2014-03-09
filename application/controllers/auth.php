@@ -410,9 +410,14 @@ class Auth extends CI_Controller {
 				'phone'      => '',
 			);
 		}
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
+		if ($this->form_validation->run() == true && ($user_id = $this->ion_auth->register($username, $password, $email, $additional_data)))
 		{
 			//check to see if we are creating the user
+			if($user_id != false){
+				//Create a default playlist for the user
+				$this->load->database();
+				$this->db->insert('playlists',array('name'=>'Default','user_id'=>$user_id,'default'=>1));
+			}
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 			redirect("auth/login", 'refresh');

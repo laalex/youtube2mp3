@@ -19,7 +19,7 @@ class api extends CI_Controller{
 		$_request = $this->input->server('REQUEST_METHOD');
 		if($_request !== 'POST'):
 			http_response_code(403);
-			exit();
+			exit('GET_NOT_ALLOWED');
 		endif;
 		$post = $this->input->post();
 		if(empty($post['user']) || empty($post['pass'])):
@@ -35,9 +35,10 @@ class api extends CI_Controller{
 
 		$this->_uid = $this->session->userdata('user_id');
 	}
+
 	public function index(){
 		$post = $this->input->post();
-		print json_encode(array('logged_in'=>'true','user'=>array('uid'=>$this->session->userdata('user_id'),'username'=>$post['user'],'password'=>$post['pass'])));
+		print json_encode(array('logged_in'=>'true','user'=>array('uid'=>$this->_uid,'username'=>$post['user'],'password'=>$post['pass'])));
 	}
 
 
