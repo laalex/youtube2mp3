@@ -22,6 +22,10 @@ class api extends CI_Controller{
 			exit('GET_NOT_ALLOWED');
 		endif;
 		$post = $this->input->post();
+		if(empty($post)){
+			$data = file_get_contents("php://input");
+ 			$post = json_decode($data,true);
+		}
 		if(empty($post['user']) || empty($post['pass'])):
 			http_response_code(403);
 			print json_encode(array('logged_in'=>'false','error'=>'Missing credentials'));
