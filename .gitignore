@@ -7,3 +7,9 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+
+
+downloads/*
+application/config/config.php
+application/config/database.php
+.htaccess

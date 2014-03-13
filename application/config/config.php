@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://stardust.alexandrulamba.com/youtube2mp3';
+$config['base_url']	= 'http://zonglist.local';
 
 /*
 |--------------------------------------------------------------------------
