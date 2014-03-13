@@ -10,7 +10,7 @@ class web extends CI_Controller{
 		//Check if user is logged in
 		if($this->ion_auth->logged_in()):
 			//The user is logged in -> Redirect to the application
-			redirect(base_url().'dashboard');
+			redirect(base_url().'dashboard/');
 		endif;
 	}
 

@@ -9,24 +9,23 @@ class application extends CI_Controller{
 			//The user is logged in -> Redirect to the application
 			redirect(base_url().'login');
 		endif;
-		//Include the header file
 		$this->load->model('application_model');
-		$data['playlists'] = $this->application_model->get_my_playlists();
-		$this->load->view('application/inc/header');
-		$this->load->view('application/inc/sidebar-menu',$data);
 	}
 
 	//Default website
 	public function index(){
+		//Include the header file
+		$data['playlists'] = $this->application_model->get_my_playlists();
+		$this->load->view('application/inc/header');
+		$this->load->view('application/inc/sidebar-menu',$data);
 		$this->load->view('application/dashboard');
 		$this->load->view('application/inc/footer');
 	}
 
 	//Playlits
 	public function playlists(){
-		$data['playlists'] = $this->application_model->get_my_playlists();
-		$this->load->view('application/playlists',$data);
-		$this->load->view('application/inc/footer');
+		$playlists = $this->application_model->get_my_playlists();
+		print json_encode($playlists);
 	}
 
 	//Set default playlist
@@ -41,15 +40,8 @@ class application extends CI_Controller{
 
 	//View playlist
 	public function view_playlist(){
-		$data['playlist'] = $this->application_model->get_playlist();
-		$this->load->view('application/playlist',$data);
-		$this->load->view('application/inc/footer');
+		$data = $this->application_model->get_playlist();
+		print json_encode($data);
 	}
-
-	//Settings
-	public function settings(){
-		$this->load->view('application/settings');
-	}
-
 
 }

@@ -30,6 +30,8 @@
   		$cmd .="--simulate ";
   		//Return the result as JSON
   		$cmd .="--dump-json ";
+      //Restrict file names?
+      $cmd .="--restrict-filenames ";
   		//Append the  video URL to the cmd
   		$cmd .= '"'.escapeshellarg($url).'"';
   		//Escape the CMD
@@ -56,11 +58,12 @@
   		$cmd = $_this->config->item('exepath')." ";
   		//Append the progress return
   		$cmd .="--newline ";
+      $cmd .="--restrict-filenames ";
   		//Append the  video URL to the cmd
-  		$cmd .= '-o "downloads/'.$uid.'/%(title)s.%(ext)s" "'.escapeshellarg($url).'" ';
+  		$cmd .= '-o "downloads/'.$uid.'/%(title)s-%(id)s.%(ext)s" "'.escapeshellarg($url).'" ';
   		//Escape the CMD
   		$cmd = escapeshellcmd($cmd);
-  		header("Content-type: text/json");
+  		header("Content-type: text/json; charset=utf-8");
   		disable_ob();
   		//Execute the command and return the response
   		system($cmd);
@@ -73,19 +76,20 @@
   if(!function_exists('ydl_convert')):
     function ydl_convert($file,$id){
       //Create file name
-      $fpath = 'downloads/'.$id.'/'.$file.'.mp4';
+      $fpath = 'downloads/'.$id.'/'.$file;
       $_this =& get_instance();
       $_this->config->load('ydl_config');
       //Append path of exe file
       $cmd = $_this->config->item('ffmpegpath')." ";
       //Append conversion filters
       $file = str_replace(' ', '_', $file);
-      $mfile = 'downloads/'.$id.'/'.$file;
+      $file = str_replace('.mp4','',$file);
+      $mfile = 'downloads/'.$id.'/'.$file.'[www.zonglist.com]';
       $cmd .= '-i '.escapeshellarg($fpath).' -b:a 192K -vn '.escapeshellarg($mfile).'.mp3';
       $cmd = escapeshellcmd($cmd);
       system($cmd);
       //File converted. Remove the mp4 file
-      @unlink($fpath);
+      unlink($fpath);
       //Return the file name
       print json_encode(array('file_name'=>$file.'.mp3'));
     }

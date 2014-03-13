@@ -11,8 +11,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?print base_url();?>dashboard"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
-            <li><a href="<?print base_url();?>settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>
+            <li><a id="toggle-downloads" data-visible="ok"><span class="glyphicon glyphicon-resize-small"></span>&nbsp;Hide downloads</a></li>
+            <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
+            <!--<li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>-->
           </ul>
         </div>
       </div>
@@ -22,19 +23,15 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="<?print base_url();?>dashboard"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
-            <li><a href="<?print base_url();?>playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
-            <li><a href="<?print base_url();?>settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>
-            <li><a href="<?print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
+            <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
+            <li><a href="<?php print base_url();?>dashboard/#/playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
+            <!--<li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>-->
+            <li><a href="<?php print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
           </ul>
-          <?php if(!empty($playlists)): ?>
             <hr />
-              <h4><span class="glyphicon glyphicon-music"></span>&nbsp;Your playlists</h4>
-              <ul class="nav nav-sidebar">
-                <?php foreach($playlists as $list): ?>
-                  <li><a href="<?print base_url();?>playlists/<?php print $list->list_id;?>"><span class="glyphicon glyphicon-tag"></span>&nbsp;<?php print $list->name; ?></a></li>
-                <?php endforeach; ?>
-              </ul>
+              <h4 ng-controller="playlistsController"><span class="glyphicon glyphicon-music"></span>&nbsp;Listening now</h4>
+              <audio controls style="width:100%" id="musicplayer">
+                Your browser does not support HTML default MP3 player. Sorry for that. Please go ahead and download each song or the entire playlist.
+              </audio>
             <hr />
-          <?php endif; ?>
         </div>

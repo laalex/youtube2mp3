@@ -22,11 +22,16 @@ class application_model extends CI_Model{
 	/* Return requested playlist */
 	public function get_playlist(){
 		//Get the user ID
-		$id = $this->uri->segment(2);
+		$id = $this->uri->segment(3);
 		$uid = $this->session->userdata('user_id');
 		$return['playlist_data'] = $this->db->from('playlists')->where(array('user_id'=>$uid,'list_id'=>$id))->get()->first_row();
 		/* Get all songs in the current list */
 		$return['playlist_songs'] = $this->db->from('songs')->where(array('user_id'=>$uid,'list_id'=>$id))->get()->result();
+		foreach($return['playlist_songs'] as &$s):
+			$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
+			$s->nice_name = str_replace('_',' ',$s->song_name);
+			$s->nice_name = str_replace('.mp3','',$s->nice_name);
+		endforeach;
 		return $return;
 	}
 
@@ -36,7 +41,7 @@ class application_model extends CI_Model{
 		$uid = $this->session->userdata('user_id');
 		$this->db->where('user_id',$uid)->update('playlists',array('default'=>0));
 		$this->db->where(array('user_id'=>$uid,'list_id'=>$set))->update('playlists',array('default'=>1));
-		redirect(base_url().'playlists');
+		print true;
 	}
 
 	/* Remove playlist */
@@ -56,7 +61,7 @@ class application_model extends CI_Model{
 			//This is not a default playlist -> Delete it
 			$this->db->delete('playlists',array('list_id'=>$id));
 		}
-		redirect(base_url().'playlists');
+		print 'success';
 	}
 
 }

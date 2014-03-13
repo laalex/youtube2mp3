@@ -38,6 +38,7 @@
   </div>
 </div>
 
+
 <div class="container">
 
   <div class="row">
@@ -67,43 +68,7 @@
   <br />
   Click the button below and get started right away</p>
   <br />
-  <a href="#"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-phone"></span>&nbsp;DOWNLOAD</div></a>
-</div>
-<hr>
-
-
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-4">
-      <img src="<?php print base_url();?>assets/img/zonglist_splash.jpg" alt="" class="img-thumbnail">
-    </div>
-    <div class="col-md-8">
-      <p><b>Use your account to download all the music to your phone</b></p>
-      <p>All you have to do is to follow some simple steps:</p>
-      <ul>
-        <li>Create an account</li>
-        <li>Copy &amp; paste the YouTube, Vimeo, Facebook, or any other video link</li>
-        <li>Wait for the file to be downloaded &amp; converted</li>
-        <li>Go to your phone, login in our application, hit download on the selected items</li>
-        <li>Listen to the music of your soul</li>
-      </ul>
-      <p>Everyone that has an Android device can use the application, and our website to download music fast and without any other stress.</p>
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-     <div class="col-md-8">
-      <p><b>Use our website from any operating system or device</b></p>
-      <p>Despite the fact that our mobile native application currently targets only Android, you can use our website to download the MP3 to your computer by using any device  you'd like.</p>
-      <p>Our website is simple - so it will make it faster and easier for you to get the music faster - and will work on any screen size. Use it to download music anytime, anywhere.</p>
-      <p><b>Android users</b> have advantage of downloading multiple songs at a time / playlists / keep track of their downloads on our servers. </p>
-    </div>
-    <div class="col-md-4">
-      <img src="http://static.bomgar.com/assets/images/cross-platform-support-489.png" alt="" class="img-thumbnail">
-    </div>
-  </div>
-
+  <a href="<?php base_url();?>assets/apk/beta-zonglist.apk"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-phone"></span>&nbsp;DOWNLOAD</div></a>
 </div>
 <hr>
 

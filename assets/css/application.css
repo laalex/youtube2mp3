@@ -173,3 +173,16 @@ body {
   width:0%;
   background: #FF851B;
 }
+
+
+.highlighted {
+  color:#fff !important;
+}
+
+#toggle-downloads {
+  cursor: pointer;
+}
+
+.active{
+  color:#000;
+}

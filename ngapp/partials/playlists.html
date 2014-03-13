@@ -1,0 +1,56 @@
+	<a href="/#/playlists" id="add-new-playlist" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> &nbsp; Click here to create a playlist</a>
+	<!-- Playlist modal -->
+	<div class="closed" id="add-new-playlist-form">
+	<br />
+		<form id="new-playlist-form" ng-submit="addPlaylist()">
+	      	<input type="text" ng-model="name" placeholder="Playlist name" class="form-control">
+	      	<br />
+	      	<input type="submit" value="Create playlist" class="btn btn-success">
+	    </form>
+	</div>
+	<hr />
+	<table class="table table-striped">
+		<thead>
+			<th>Playlist name</th><th colspan="3">Actions</th>
+		</thead>
+
+			<tr ng-repeat="playlist in playlists">
+				
+				<td width="50%">
+					<h4 class="label label-success">{{playlist.name}}</h4>&nbsp;<label class="label label-default" ng-if="playlist.default == 1">Default playlist</label>
+				</td>
+				<td>
+					<a href="/dashboard/#/view/{{playlist.list_id}}" class="btn btn-success btn-xs" style="width:100px">View playlist</a>
+				</td>
+				<td>
+					<a href="/dashboard/#/playlists" data-pid="{{playlist.list_id}}" class="btn btn-warning btn-xs confirm" style="width:100px">Remove</a>
+				</td>
+				<td>
+					<a href="/dashboard/#/playlists" data-id="{{playlist.list_id}}" ng-click="makeDefault()" style="width:100px" class="btn btn-default btn-xs">Make default</a>
+				</td>
+				
+			</tr>
+	</table> 
+
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Confirm action</h4>
+	      </div>
+	      <div class="modal-body">Are you sure you want to take this action?</div>
+
+	      <div class="modal-footer">
+	        <a type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</a>
+	        <a type="button" ng-click="confirmAction()" class="btn btn-primary btn-sm">Yes</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
+	<input ng-model="removeid" name="removeid" value="0" style="display:none" id="confirm_url">
+
+	<div class="clearfix"></div>
+	<br />

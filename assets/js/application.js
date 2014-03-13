@@ -10,36 +10,6 @@ $(window).ready(function(){
 		$("#add-new-playlist-form").fadeIn("fast");
 		return false;
 	});
-	//Create new playlist - Submit form
-	$(document).on('submit',"#new-playlist-form",function(evt){
-		var name = $(this).find('input[name="name"]').val();
-		if(name!==''){
-			//Playlist name is not empty -> Process playlist addition
-			$("#add-playlist-watchdog").html("<span><img src='"+assets_img+"smallpr.GIF'> &nbsp; Loading...</span>");
-			//Send ajax request
-			$.ajax({
-				url:baseurl+'ajax/playlists',
-				type:'POST',
-				data:{action:'add_playlist',playlist_name:name},
-				success:function(data){
-					data = $.parseJSON(data);
-					if(data.response=='success'){
-						$("#add-playlist-watchdog").html("<span class='glyphicon glyphicon-ok'></span>&nbsp;Your playlist has been created!").fadeIn();
-					}else{
-						$("#add-playlist-watchdog").html("<span class='glyphicon glyphicon-remove'></span>&nbsp;"+data.details).fadeIn();
-					}
-				},
-				error:function(data){
-					$("#add-playlist-watchdog").html("There was an error. Please try again.").fadeIn();
-					console.log(data);
-				}
-			});
-		}else{
-			//Playlist name is empty. Show error
-			$("#add-playlist-watchdog").html('Playlist name cannot be empty').fadeIn();
-		}
-		return false;
-	});
 
 
 	/* Downloader */
@@ -64,7 +34,7 @@ $(window).ready(function(){
 		var song_id = parent.attr('data-songid');
 		var playlist = $(this).data('id');
 		$.ajax({
-			url:'http://stardust.alexandrulamba.com/youtube2mp3/ajax/playlists',
+			url:baseurl+'ajax/playlists',
 			type:'POST',
 			data:{action:'put_song_in_playlist',song_id:song_id,playlist:playlist},
 			success:function(data){
@@ -81,26 +51,78 @@ $(window).ready(function(){
 		var pid = $(this).data('playlist');
 		$("#watchdog").fadeIn();
 		$.ajax({
-			url:'http://stardust.alexandrulamba.com/youtube2mp3/ajax/pack_download',
+			url:baseurl+'ajax/pack_download',
 			type:'POST',
 			data:{playlist:pid},
 			success:function(data){
 				data = $.parseJSON(data);
-				$("#watchdog").html('Your archive has been created and download should start!');
+				$("#watchdog").html('Your archive has been created and download should start!').fadeIn().delay(5000).fadeOut();
 				window.location = data.zip;
 			}
 		});
+	});
+
+	$(document).on('click',"#toggle-downloads",function(){
+		var vis = $(this).data('visible');
+		if(vis=='ok'){
+			$(this).addClass('highlighted').html('<span class="glyphicon glyphicon-resize-full"></span>&nbsp;Show downloads');
+			$("#current-vd-downloads-holder").hide();
+			$(this).data('visible','false');
+		} else {
+			$(this).removeClass('highlighted').html('<span class="glyphicon glyphicon-resize-small"></span>&nbsp;Hide downloads');
+			$("#current-vd-downloads-holder").show();
+			$(this).data('visible','ok');
+		}
 	});
 
 
 	/* Confirm modal */
 	$(document).on('click','.confirm',function(){
 		$(".modal").modal();
-		$("#confirm_url").attr('href',$(this).attr('href'));
+		$("#confirm_url").attr('value',$(this).attr('data-pid'));
 		return false;
 	});
 
+	$(document).on('click','.listen-song-action',function(){
+		var audio = document.getElementById('musicplayer');
+		var song_url = $(this).data('url');
+		audio.setAttribute('src',song_url);
+		audio.load();
+		audio.play();
+	});
+
+	$(document).on('click','.video-close',function(){
+		$(this).parent().hide();
+	});
+
 });
+
+	/* ANGULAR JS APPLICATION */
+	zonglist = angular.module('zonglist',["ngRoute","zonglistControllers"]);
+	zonglistControllers = angular.module('zonglistControllers',[]);
+	//ZongList configuration
+	zonglist.config(["$routeProvider",function($routeProvider){
+		$routeProvider.
+		when('/',{
+			templateUrl:'/ngapp/partials/dashboard.html',
+			controller:'dashboardController'
+		}).
+		when('/playlists',{
+			templateUrl:'/ngapp/partials/playlists.html',
+			controller:'playlistsController'
+		}).
+		when('/view/:playlistID',{
+			templateUrl:'/ngapp/partials/view_playlist.html',
+			controller:'viewplaylistController'
+		}).
+		when('/settings',{
+			templateUrl:'/ngapp/partials/settings.html',
+			controller:'settingsController'
+		}).
+		otherwise({
+			redirectTo:'/'
+		});
+	}]);
 
 
 /* 
@@ -115,7 +137,7 @@ function ydlsetdownload(data,videourl,container){
 	var rand_no = Math.floor( Math.random()*99999 );
 	var uniqueid = 'id-'+rand_no+timestamp;
 	clone.removeAttr('id').attr('id',uniqueid);
-	$("#main_dashboard").append(clone);
+	$("#current-vd-downloads-holder").append(clone);
 	container = '#'+uniqueid;
 	$(container).fadeIn();
 	$("#video-url-button").attr('value','Download video');
@@ -124,14 +146,14 @@ function ydlsetdownload(data,videourl,container){
 	var progressbar = $(container).find('.video-progressbar');
 	var downloadbutton = $(container).find('.download-action');
 	var actiontag = $(container).find('.download-tag');
-	var file = data.title;
+	var file = data._filename;
 	var playlistupdater = $(container).find('.playlist-updater');
 	var playlistselector = $(container).find('.playlist-selector');
 	ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,playlistupdater,playlistselector);
 }
 
 function start_song_download(videourl,container,progressbar){
-	var url = 'http://stardust.alexandrulamba.com/youtube2mp3/ajax/downloader';
+	var url = baseurl+'ajax/downloader';
 	var result;
 	$.ajax({
 		url:url,
@@ -142,14 +164,14 @@ function start_song_download(videourl,container,progressbar){
 		},
 		error:function(data){
 			//Error happened
-			alert('error');
+			alert('Cannot download this file. Please try again!');
 		}
 	});
 }
 /* Print in the download progress into the div */
 function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdater,playlistselector){
 	var progress_int = 0;
-	var url = 'http://stardust.alexandrulamba.com/youtube2mp3/ajax/downloader';
+	var url = baseurl+'ajax/downloader';
 	params = 'action=download_video&url='+videourl;
 	var xmlhttp=new XMLHttpRequest();
 	xmlhttp.open('POST',url,true);
@@ -181,7 +203,7 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 			$(actiontag).html('Converting your video to MP3').addClass('label-success').removeClass('label-info');
 			//Trigger ajax request to transform MP4 to MP3
 			$.ajax({
-				url:'http://stardust.alexandrulamba.com/youtube2mp3/ajax/downloader',
+				url:baseurl+'ajax/downloader',
 				type:'POST',
 				data:{action:'convert_video',video_name:file},
 				success:function(data){
@@ -189,7 +211,7 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 					//Register this information into the database for the current user and display the download button
 					//Do an ajax request and add the song into the users database
 					$.ajax({
-						url:'http://stardust.alexandrulamba.com/youtube2mp3/ajax/songs',
+						url:baseurl+'ajax/songs',
 						type:'POST',
 						data:{action:'register_song',song_title:data.file_name},
 						success:function(data){

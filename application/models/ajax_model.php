@@ -15,6 +15,9 @@ class ajax_model extends CI_Model{
 		//Get the post request
 		$post = $this->input->post();
 		$uid = $this->session->userdata('user_id');
+		if(empty($post)){
+			$post = json_decode(file_get_contents('php://input'),true);
+		}
 		if(isset($post)):
 			$request_type = $post['action'];
 			/* Switch request type and return the propper response*/
@@ -27,9 +30,11 @@ class ajax_model extends CI_Model{
 					if($ret == 0):
 						//Insert the playlist into the database
 						$this->db->insert('playlists',array('name'=>$name,'user_id'=>$uid));
-						print json_encode(array('response'=>'success','details'=>'Your playlist <b>'.$name.'</b> has been created!'));
+						$insert_id = $this->db->insert_id();
+						$playlist = $this->db->where('list_id',$insert_id)->get('playlists')->first_row();
+						print json_encode(array('response'=>'success','message'=>'Your playlist <b>'.$name.'</b> has been created!','playlist'=>$playlist));
 					else:
-						print json_encode(array('response'=>'error','details'=>'You already have a playlist called <b>"'.$name.'"</b>. Please pick another name ;)'));
+						print json_encode(array('response'=>'error','message'=>'You already have a playlist called <b>"'.$name.'"</b>. Please pick another name ;)'));
 					endif;
 				break;
 

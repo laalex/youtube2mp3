@@ -48,8 +48,8 @@ $route['logout'] = 'auth/logout';
 /* Application routes */
 $route['dashboard'] = 'application';
 $route['settings'] = 'application/settings';
-$route['playlists'] = 'application/playlists';
-$route['playlists/(:num)'] = 'application/view_playlist';
+$route['playlists/getPlaylists'] = 'application/playlists';
+$route['playlists/get/(:num)'] = 'application/view_playlist';
 $route['playlists/set_default/(:num)'] = 'application/set_default';
 $route['playlists/remove/(:num)'] = 'application/remove_playlist';
 

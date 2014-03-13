@@ -1,18 +1,13 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main_dashboard">
-	<form  id="video-convert-form" method="post">
-		<div class="input-group">
-      		<input type="text" class="form-control" id="video-url-input" placeholder="Input your youtube video URL over here">
-      		<span class="input-group-btn">
-      			<input type="submit" id="video-url-button" class="btn btn-default" value="Download video">
-      		</span>
-      	</div>
-	</form>
-	<br />
-
-	<!-- WATCHDOG -->
 	<div class="alert alert-info" id="watchdog" style="display:none"></div>
 
-	<div id="video-download-response" style="display:none">
+	<div ng-view></div>
+	<!-- WATCHDOG -->
+	
+	<br />
+	<div id="current-vd-downloads-holder"></div>
+	<div id="video-download-response" style="position:relative;display:none;">
+		<div  class="close video-close" aria-hidden="true" style="right:10px;top:10px;cursor:pointer;z-index:9999;position:absolute">&times;</div>
 		<!-- VIDEO ENTRY -->
 		<div class="video-entry">
 
@@ -61,5 +56,4 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-
 </div>
