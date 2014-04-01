@@ -4,7 +4,7 @@
   = Library URL: https://github.com/rg3/youtube-dl
   = Helper written by Alexandru Lamba
   ========================================================================
-  = This helper provides some functions used to get different video 
+  = This helper provides some functions used to get different video
   = information and/or perform different tasks with the youtube-dl
   = extension on Windows based servers
   ========================================================================
@@ -15,7 +15,7 @@
 
 
   /*
-  * Return video details as JSON without 
+  * Return video details as JSON without
   * @param (string) $url - YouTube video URL/Video URL
   * @return (json) - Returns JSON data for the video file
   */
@@ -33,7 +33,7 @@
       //Restrict file names?
       $cmd .="--restrict-filenames ";
   		//Append the  video URL to the cmd
-  		$cmd .= '"'.escapeshellarg($url).'"';
+  		$cmd .= $url;
   		//Escape the CMD
   		$cmd = escapeshellcmd($cmd);
   		//Execute the command and return the response
@@ -45,7 +45,7 @@
 
 
   /*
-  * Return video details as JSON without 
+  * Return video details as JSON without
   * @param (string) $url - YouTube video URL/Video URL
   * @return (json) - Returns JSON data for the video file
   */
@@ -60,9 +60,8 @@
   		$cmd .="--newline ";
       $cmd .="--restrict-filenames ";
   		//Append the  video URL to the cmd
-  		$cmd .= '-o "downloads/'.$uid.'/%(title)s-%(id)s.%(ext)s" "'.escapeshellarg($url).'" ';
-  		//Escape the CMD
-  		$cmd = escapeshellcmd($cmd);
+  		$cmd .= '-o "downloads/'.$uid.'/%(title)s-%(id)s.%(ext)s" '.escapeshellcmd($url);
+      //Should see what happens over here.
   		header("Content-type: text/json; charset=utf-8");
   		disable_ob();
   		//Execute the command and return the response
@@ -84,7 +83,7 @@
       //Append conversion filters
       $file = str_replace(' ', '_', $file);
       $file = str_replace('.mp4','',$file);
-      $mfile = 'downloads/'.$id.'/'.$file.'[www.zonglist.com]';
+      $mfile = 'downloads/'.$id.'/'.$file;
       $cmd .= '-i '.escapeshellarg($fpath).' -b:a 192K -vn '.escapeshellarg($mfile).'.mp3';
       $cmd = escapeshellcmd($cmd);
       system($cmd);
