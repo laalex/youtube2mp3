@@ -209,11 +209,11 @@ body {
 }
 
 #song_time {
-  width: 300px;
   display: inline-block;
   width:300px;
   height: 8px;
-  text-align: left
+  text-align: left;
+  padding:0;
 }
 
 #song_name,#mp3_songname {
@@ -224,9 +224,8 @@ body {
 
 #song_time_elapsed {
   height:8px;
-  width:100px;
-  margin-top:-2px;
-  margin-left:-5px;
+  width:0px;
+  padding:0;
   display: block;
 }
 
@@ -250,23 +249,37 @@ body {
 
 #volume_control {
   width:150px;
-  height: 10px;
+  height: 8px;
   position: absolute;
   left:10px;
-  bottom: 27px;
+  bottom: 35px;
   vertical-align: middle;
+  padding:0;
+  margin:0;
+  text-align: left;
 }
 
 #volume_cursor{
-  height:10px;
-  width:100px;
+  height:8px;
+  width:135px;
   padding:0;
   display: inline-block;
+  line-height: 8px;
+  position: relative;
+  cursor: pointer;
 }
 
 #volume_selected {
-  height:10px;
-  width:50%;
-  max-width: 100px;
+  height:8px;
+  width:0%;
   display: block;
+  z-index:8888;
+  cursor: pointer;
 }
+
+#play_button,#song_time_elapsed,#song_time{
+  cursor: pointer;
+}
+
+#mp3player{display:none;cursor: pointer !important;}
+a.pointer{cursor:pointer;}

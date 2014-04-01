@@ -11,7 +11,7 @@
 	<div class="alert alert-warning" id="watchdog" style="display:none">
 		<span class="glyphicon glyphicon-time"></span>&nbsp;Please wait while we are creating your download pack..
 	</div>
-	
+
 	<h3 class="oleo">Playlist tracks</h3>
 
 		<!-- iterate trough the project -->
@@ -20,7 +20,7 @@
 			<tr ng-repeat="song in songs">
 				<td style="vertical-align:middle">{{song.nice_name}}</td>
 				<td style="100px">
-					<a style="width:100%;" data-url="{{song.direct_url}}" class="btn btn-success listen-song-action">
+					<a style="width:100%;" data-url="{{song.direct_url}}" data-song-name="{{song.nice_name}}" class="btn btn-success listen-song-action">
 				  		<span class="glyphicon glyphicon-headphones"></span>&nbsp;Listen
 				  	</a>
 				</td>
@@ -34,7 +34,7 @@
 		</table>
 
 		<br />
-		
+
 		</div>
 		<div ng-if="GetSoungCount() == 0">
 		<div class="alert alert-warning" id="view-playlist-watchdog">
@@ -42,7 +42,7 @@
 		</div>
 		<a href="/#/" class="btn btn-success">Click to download a song&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
-		
+
 		<!-- endif -->
 		<div class="clearfix"></div>
 		<br />

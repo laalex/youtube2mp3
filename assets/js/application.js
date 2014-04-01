@@ -1,6 +1,16 @@
 /*
 * Application JavaScript
 */
+
+/**
+ * Objects init
+ */
+//Init the MP3 player
+rplayer.init("song_time","song_time_elapsed","mp_elapsed","mp_total","play_button","mp3_songname","volume_selected","volume_cursor");
+
+/**
+ * Click events and AJAX calls
+ */
 $(window).ready(function(){
 
 	/* Playlist Manager */
@@ -83,14 +93,18 @@ $(window).ready(function(){
 		return false;
 	});
 
+	/** RPlayer MP3 lib. */
 	$(document).on('click','.listen-song-action',function(){
-		var audio = document.getElementById('musicplayer');
 		var song_url = $(this).data('url');
-		audio.setAttribute('src',song_url);
-		audio.load();
-		audio.play();
+		var song_name = $(this).data('song-name');
+		rplayer.playSong(song_url,song_name);
 	});
 
+	$(document).on('click','#play_button',function(){rplayer.togglePlayPause()});
+
+	$(document).on('click',"#toggle_mp3",function(){$("#mp3player").slideToggle('slow');});
+
+	/** Video close */
 	$(document).on('click','.video-close',function(){
 		$(this).parent().hide();
 	});
@@ -125,7 +139,7 @@ $(window).ready(function(){
 	}]);
 
 
-/* 
+/*
 * Application functions
 */
 
