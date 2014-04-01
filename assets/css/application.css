@@ -186,3 +186,87 @@ body {
 .active{
   color:#000;
 }
+
+/** Mp3 player css */
+#mp3player {
+  width: 100%;
+  height:60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right:0;
+  background: #1d1d1d;
+  z-index: 9999;
+  border-top:1px solid #000;
+  color:#fff;
+  padding:10px;
+  text-align: center;
+  font-size:12px;
+}
+
+#player_controls {
+  margin-top:5px;
+}
+
+#song_time {
+  width: 300px;
+  display: inline-block;
+  width:300px;
+  height: 8px;
+  text-align: left
+}
+
+#song_name,#mp3_songname {
+  display: inline-block;
+  width: 400px;
+  height: 15px
+}
+
+#song_time_elapsed {
+  height:8px;
+  width:100px;
+  margin-top:-2px;
+  margin-left:-5px;
+  display: block;
+}
+
+#elapsed_time{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size:26px;
+  text-shadow:1px 0px 0px #000;
+}
+
+#mp_elapsed {
+  display: inline-block;
+  font-size: 20px;
+  color:#8d8d8d;
+}
+
+#mp_total {
+  display: inline-block;
+}
+
+#volume_control {
+  width:150px;
+  height: 10px;
+  position: absolute;
+  left:10px;
+  bottom: 27px;
+  vertical-align: middle;
+}
+
+#volume_cursor{
+  height:10px;
+  width:100px;
+  padding:0;
+  display: inline-block;
+}
+
+#volume_selected {
+  height:10px;
+  width:50%;
+  max-width: 100px;
+  display: block;
+}
