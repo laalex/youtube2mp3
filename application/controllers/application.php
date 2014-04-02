@@ -44,4 +44,19 @@ class application extends CI_Controller{
 		print json_encode($data);
 	}
 
+	//Get invitations
+	public function get_invitations(){
+		$data = $this->application_model->get_invitations();
+		print json_encode($data);
+	}
+	//Put invitation
+	public function put_invitation(){
+		$this->application_model->put_invitation();
+	}
+
+	/** Invitation accept */
+	public function accept_invite($id){
+		$this->application_model->accept_invitation($id);
+	}
+
 }

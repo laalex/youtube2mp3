@@ -64,4 +64,98 @@ class application_model extends CI_Model{
 		print 'success';
 	}
 
+	/** Return current invitations */
+	public function get_invitations(){
+		$uid = $this->session->userdata('user_id');
+		$invitations = $this->db->where('user_id',$uid)->get('invitations')->result();
+		foreach($invitations as &$i):
+			if($i->accepted) $i->accepted = 'Yes'; else $i->accepted = 'No';
+		endforeach;
+		return $invitations;
+	}
+	/** Create new invitation */
+	public function put_invitation(){
+		$post=$this->input->post();
+		if(!empty($post)):
+			if($post['email'] == '') : print json_encode("The email is empty"); return; endif;
+			if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)): print json_encode('The provided email is invalid!'); return; endif;
+			$insert = array(
+				'user_id'=>$this->session->userdata('user_id'),
+				'email'=>$post['email'],
+				'accepted'=>0
+			);
+			if($this->db->insert('invitations',$insert)){
+				//Dispatch invitation email
+				$insert_id = $this->db->insert_id();
+				$this->dispatchInvitation($post['email'],$insert_id);
+				print json_encode("Your invitation has been sent!");
+			} else {
+				print json_encode("Cannot send your invitation. Try again!");
+			}
+		else:
+			print json_encode("Cannot send your invitation. Try again!");
+		endif;
+	}
+
+	/** Dispatch invitation email */
+	public function dispatchInvitation($mail,$inv_id){
+		/** Get the email view and dispatch the invitation */
+		$data['id'] = $inv_id;
+		$view = $this->load->view('emails/invite',$data,true);
+
+		$this->email->from('no-reply@zonglist.com', 'ZongList');
+	    $this->email->to('roshkattu94@gmail.com');
+
+	    $this->email->subject('ZongList.com Invitation');
+	    $this->email->message($view);
+
+	    $this->email->send();
+	}
+
+	/**
+	 * Accept invitation method
+	 * ------------------------
+	 * This method accepts the invitation received by email
+	 * and creates the user an account.
+	 * If the account has been created then an email is dispatched to the user
+	 * sending him the credentials of his account.
+	 */
+	public function accept_invitation($id){
+		//Create account data
+		$invite = $this->db->where('invite_id',$id)->get('invitations')->first_row();
+		$email = $username = $invite->email;
+		//Generate password:
+		$password = 'password';
+		/** Register user process */
+		$additional_data = array(
+				'first_name' => '',
+				'last_name'  => '',
+				'company'    => '',
+				'phone'      => '',
+			);
+		if($user_id = $this->ion_auth->register($username, $password, $email, $additional_data = array()))
+		{
+			//check to see if we are creating the user
+			if($user_id != false){
+				//Create a default playlist for the user
+				$this->load->database();
+				$this->db->insert('playlists',array('name'=>'Default','user_id'=>$user_id,'default'=>1));
+			}
+			/** Dispatch email to the user with his credentials */
+			$data['username'] = $email;
+			$data['password'] = $password;
+			$view = $this->load->view('emails/confirm_account',$data,true);
+			$this->email->from('no-reply@zonglist.com', 'ZongList');
+		    $this->email->to('roshkattu94@gmail.com');
+
+		    $this->email->subject('ZongList Account information');
+		    $this->email->message($view);
+
+		    $this->email->send();
+			//redirect them back to the admin page
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("auth/login", 'refresh');
+		}
+	}
+
 }

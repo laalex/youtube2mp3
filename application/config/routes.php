@@ -52,7 +52,7 @@ $route['playlists/getPlaylists'] = 'application/playlists';
 $route['playlists/get/(:num)'] = 'application/view_playlist';
 $route['playlists/set_default/(:num)'] = 'application/set_default';
 $route['playlists/remove/(:num)'] = 'application/remove_playlist';
-
+$route['invitations/getInvitations'] = 'application/get_invitations';
 
 
 

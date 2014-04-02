@@ -1,32 +1,32 @@
-<h3 style="width:100%">
-	<span class="">Playlist: {{playlist.name}}</span>
 	<span class="pull-right">
-		{{GetSongCount()}} song(s)
+		<span class="label label-danger">{{GetSongCount()}} song(s)</span>
 	</span>
-</h3>
-	<hr />
-	<div ng-if="GetSongCount() > 0">
-	<a href="/dashboard/#/" class="btn btn-default" id="create-pack-download" data-playlist="{{playlist.list_id}}">Download all</a>
-	<br /><br />
-	<div class="alert alert-warning" id="watchdog" style="display:none">
-		<span class="glyphicon glyphicon-time"></span>&nbsp;Please wait while we are creating your download pack..
+	<br />
+	<div ng-if="GetSongCount() > 0" id="download_playlist" class="pull-left">
+		<a href="/dashboard/#/" class="" id="create-pack-download" data-playlist="{{playlist.list_id}}">
+			<span class="label label-success label-download-playlist"><span class="glyphicon glyphicon-download"></span>&nbsp;DOWNLOAD "{{playlist.name}}"</span>
+		</a>
+		<div class="alert alert-warning" id="watchdog" style="display:none">
+			<span class="glyphicon glyphicon-time"></span>&nbsp;Please wait while we are creating your download pack..
+		</div>
 	</div>
 
-	<h3 class="oleo">Playlist tracks</h3>
 
+	<div class="clearfix"></div>
+	<br />
 		<!-- iterate trough the project -->
 
-		<table class="table table-striped">
+		<table class="table table-condensed">
 			<tr ng-repeat="song in songs">
 				<td style="vertical-align:middle">{{song.nice_name}}</td>
 				<td style="100px">
-					<a style="width:100%;" data-url="{{song.direct_url}}" data-song-name="{{song.nice_name}}" class="btn btn-success listen-song-action">
-				  		<span class="glyphicon glyphicon-headphones"></span>&nbsp;Listen
+					<a style="width:100%;" data-url="{{song.direct_url}}" data-song-name="{{song.nice_name}}" class="pointer listen-song-action">
+				  		<span class="glyphicon glyphicon-headphones"></span>
 				  	</a>
 				</td>
-				<td style="100px">
-					<a style="width:100%" href="/download/hash/{{song.download_url}}" class="btn btn-primary">
-				   		<span class="glyphicon glyphicon-ok"></span>&nbsp;Download
+				<td>
+					<a style="width:100%" href="/download/hash/{{song.download_url}}">
+				   		<span class="glyphicon glyphicon-download"></span>
 				   	</a>
 				</td>
 

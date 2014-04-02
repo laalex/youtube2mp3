@@ -26,13 +26,7 @@
           <ul class="nav nav-sidebar">
             <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
             <li><a href="<?php print base_url();?>dashboard/#/playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
-            <!--<li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>-->
+            <li><a href="<?php print base_url();?>dashboard/#/invite"><span class="glyphicon glyphicon-user"></span>&nbsp;Invite friend</a></li>
             <li><a href="<?php print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
           </ul>
-            <hr />
-              <h4 ng-controller="playlistsController"><span class="glyphicon glyphicon-music"></span>&nbsp;Listening now</h4>
-              <audio controls style="width:100%" id="musicplayer">
-                Your browser does not support HTML default MP3 player. Sorry for that. Please go ahead and download each song or the entire playlist.
-              </audio>
-            <hr />
         </div>

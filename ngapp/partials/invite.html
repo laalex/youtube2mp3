@@ -1,0 +1,24 @@
+<form  id="user-invite-form" method="post">
+    <div class="input-group">
+        <input type="text" class="form-control" name="email" id="invite-email" placeholder="Input your friends email">
+        <span class="input-group-btn">
+            <input type="submit" id="video-url-button" class="btn btn-default" value="Send invitation">
+        </span>
+    </div>
+</form>
+<div class="clearfix"></div>
+<br />
+<span class="label label-default">Your invited friends</span>
+<br />
+<table class="table table-condensed table-striped" style="width:100%">
+    <thead>
+        <th>Email Address</th><th>Invite date</th><th>Is your frined registered?</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="inv in invites">
+            <td>{{inv.email}}</td>
+            <td>{{inv.timestamp}}</td>
+            <td>{{inv.accepted}}</td>
+        </tr>
+    </tbody>
+</table>

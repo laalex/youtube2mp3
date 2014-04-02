@@ -281,5 +281,37 @@ body {
   cursor: pointer;
 }
 
-#mp3player{display:none;cursor: pointer !important;}
+#mp3player{cursor: pointer !important;}
 a.pointer{cursor:pointer;}
+
+/**
+ * Overrides for bootstrap
+ */
+
+a:hover{text-decoration: none;}
+.table {
+  font-size:13px;
+}
+
+.table tr:hover{
+  background:#f9f9f9;
+}
+
+#download_playlist{
+  display: block;
+  font-weight: bold;
+  font-size:13px !important;
+}
+.label-download-playlist{
+  padding:10px 20px !important;
+  font-sie:14px !important;
+}
+.label-submit{
+  font-size:12px;font-weight: bold;
+  color:#fff;
+  cursor: pointer;
+  padding:3px 10px;
+}
+.label-submit:hover{
+  color:#fff;
+}

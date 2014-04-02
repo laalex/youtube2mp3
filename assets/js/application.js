@@ -109,6 +109,20 @@ $(window).ready(function(){
 		$(this).parent().hide();
 	});
 
+	/** Send friend invitation */
+	$(document).on('submit','#user-invite-form',function(){
+		var email = $("#invite-email").val();
+		$.ajax({
+			type:'POST',
+			url:baseurl+'application/put_invitation',
+			data:{email:email},
+			success:function(data){
+				data = $.parseJSON(data);
+				$("#watchdog").html(data).fadeIn().delay(5000).fadeOut();
+			}
+		})
+	});
+
 });
 
 	/* ANGULAR JS APPLICATION */
@@ -128,6 +142,10 @@ $(window).ready(function(){
 		when('/view/:playlistID',{
 			templateUrl:'/ngapp/partials/view_playlist.html',
 			controller:'viewplaylistController'
+		}).
+		when('/invite',{
+			templateUrl:'/ngapp/partials/invite.html',
+			controller:'inviteController'
 		}).
 		when('/settings',{
 			templateUrl:'/ngapp/partials/settings.html',
