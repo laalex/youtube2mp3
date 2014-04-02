@@ -59,4 +59,9 @@ class application extends CI_Controller{
 		$this->application_model->accept_invitation($id);
 	}
 
+	/** Change password */
+	public function change_password(){
+		$this->application_model->change_password();
+	}
+
 }

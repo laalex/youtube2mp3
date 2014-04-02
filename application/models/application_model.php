@@ -158,4 +158,23 @@ class application_model extends CI_Model{
 		}
 	}
 
+	/** Change user password */
+	public function change_password(){
+		$post = $this->input->post();
+		if(!empty($post)):
+			$pwd = $post['password'];
+			$old = $post['old_password'];
+			$identity = $this->session->userdata($this->config->item('identity', 'ion_auth'));
+			$change = $this->ion_auth->change_password($identity, $old, $pwd);
+
+			if($change){
+				print json_encode("Your password has changed!");
+			} else {
+				print json_encode("Failed to change your password! Try again!");
+			}
+		else:
+			print json_encode("Your inserted password is empty!");
+		endif;
+	}
+
 }

@@ -27,6 +27,7 @@
             <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
             <li><a href="<?php print base_url();?>dashboard/#/playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
             <li><a href="<?php print base_url();?>dashboard/#/invite"><span class="glyphicon glyphicon-user"></span>&nbsp;Invite friend</a></li>
+            <li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>
             <li><a href="<?php print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
           </ul>
         </div>

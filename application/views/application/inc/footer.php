@@ -37,6 +37,7 @@
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/playlists.js"></script>
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/view_playlist.js"></script>
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/invite.js"></script>
+	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/settings.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>bootstrap.min.js"></script>
 </body>
 </html>

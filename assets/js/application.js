@@ -114,13 +114,31 @@ $(window).ready(function(){
 		var email = $("#invite-email").val();
 		$.ajax({
 			type:'POST',
-			url:baseurl+'application/put_invitation',
+			url:baseurl+'settings/change_password',
 			data:{email:email},
 			success:function(data){
 				data = $.parseJSON(data);
 				$("#watchdog").html(data).fadeIn().delay(5000).fadeOut();
 			}
-		})
+		});
+	});
+
+	/**Password change action - Settings */
+	$(document).on('click','#password-change-action',function(){
+		var p = $('#password-change').val();
+		var o = $("#password-change-old").val();
+		if(p=='' || o == ''){alert('Please complete both password fields');} else {
+			//Change password
+			$.ajax({
+				type:'POST',
+				url:baseurl+'settings/change_password',
+				data:{password:p,old_password:o},
+				success:function(data){
+					data = $.parseJSON(data);
+					$("#watchdog").html(data).fadeIn().delay(5000).fadeOut();
+				}
+			});
+		}
 	});
 
 });
