@@ -215,7 +215,7 @@ class Auth extends CI_Controller {
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
                 redirect("auth/forgot_password", 'refresh');
             }
-            
+
 			//run the forgotten password method to email an activation code to the user
 			$forgotten = $this->ion_auth->forgotten_password($identity->{$this->config->item('identity', 'ion_auth')});
 
@@ -387,68 +387,6 @@ class Auth extends CI_Controller {
 
 			//redirect them back to the auth page
 			redirect('auth', 'refresh');
-		}
-	}
-
-
-	//Offer the user the ability to register
-	public function register(){
-		/* Validate form input */
-		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[users.email]');
-		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
-		if ($this->form_validation->run() == true)
-		{
-			$username = strtolower($this->input->post('email'));
-			$email    = strtolower($this->input->post('email'));
-			$password = $this->input->post('password');
-
-			$additional_data = array(
-				'first_name' => '',
-				'last_name'  => '',
-				'company'    => '',
-				'phone'      => '',
-			);
-		}
-		if ($this->form_validation->run() == true && ($user_id = $this->ion_auth->register($username, $password, $email, $additional_data)))
-		{
-			//check to see if we are creating the user
-			if($user_id != false){
-				//Create a default playlist for the user
-				$this->load->database();
-				$this->db->insert('playlists',array('name'=>'Default','user_id'=>$user_id,'default'=>1));
-			}
-			//redirect them back to the admin page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth/login", 'refresh');
-		}
-		else
-		{
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-			//Display the register form
-			$this->data['email'] = array(
-				'name'  => 'email',
-				'id'    => 'email',
-				'type'  => 'text',
-				'class' => 'form-control',
-				'value' => $this->form_validation->set_value('email'),
-			);
-			$this->data['password'] = array(
-				'name'  => 'password',
-				'id'    => 'password',
-				'type'  => 'password',
-				'class' => 'form-control',
-				'value' => $this->form_validation->set_value('password'),
-			);
-			$this->data['password_confirm'] = array(
-				'name'  => 'password_confirm',
-				'id'    => 'password_confirm',
-				'type'  => 'password',
-				'class' => 'form-control',
-				'value' => $this->form_validation->set_value('password_confirm'),
-			);
-
-			$this->_render_page('auth/register', $this->data);
 		}
 	}
 
