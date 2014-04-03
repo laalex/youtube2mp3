@@ -19,17 +19,17 @@
 		<table class="table table-condensed">
 			<tr ng-repeat="song in songs">
 				<td style="vertical-align:middle">
-					<span ng-if="song.is_downloaded == 0" class="label label-default">Expired</span>
+					<span ng-if="song.is_downloaded == 0" class="label label-default expired-{{song.song_id}}">Expired</span>
 					<span ng-if="song.is_downloaded == 1" class="label label-warning">Active</span>
 					{{song.nice_name}}
 				</td>
 				<td style="100px">
-					<a style="width:100%;" data-url="{{song.direct_url}}" data-song-name="{{song.nice_name}}" class="pointer listen-song-action">
+					<a style="width:100%;" data-url="{{song.direct_url}}" data-video-id="{{song.video_id}}" data-song-id="{{song.song_id}}" data-song-status="{{song.is_downloaded}}" data-song-name="{{song.nice_name}}" class="pointer listen-song-action">
 				  		<span class="glyphicon glyphicon-headphones"></span>
 				  	</a>
 				</td>
 				<td>
-					<a style="width:100%" href="/download/hash/{{song.download_url}}">
+					<a style="width:100%" class="song-download-action" data-url="download/hash/{{song.download_url}}">
 				   		<span class="glyphicon glyphicon-download"></span>
 				   	</a>
 				</td>

@@ -76,7 +76,7 @@
    * Download the video silently from the video ID
    */
   if(!function_exists('ydl_silent_download')):
-    function ydl_silent_download($url,$uid){
+    function ydl_silent_download($url,$uid,$reload=false){
       //Load CI Instance and load the config file
       $_this =& get_instance();
       $_this->config->load('ydl_config');
@@ -95,6 +95,8 @@
       $file = $vdata->_filename;
       //Convert video
       ydl_convert($file,$uid,true);
+      if($reload)
+        print json_encode('ok');
     }
   endif;
 

@@ -97,7 +97,30 @@ $(window).ready(function(){
 	$(document).on('click','.listen-song-action',function(){
 		var song_url = $(this).data('url');
 		var song_name = $(this).data('song-name');
-		rplayer.playSong(song_url,song_name);
+		//Check song status
+		var status = $(this).data('song-status');
+		var sid = $(this).data('song-id');
+		var vid = $(this).data('video-id');
+		if(status==0){
+			//The song is not downloaded. Cast download
+			$("#watchdog").html('The song is downloading and will be played when completed.').fadeIn().delay(5000).fadeOut();
+			$.ajax({
+				url:baseurl+'download/reload_song',
+				type:'POST',
+				data:{song_id:sid,video_id:vid},
+				success:function(data){
+					data = $.parseJSON(data);
+					if(data=='ok'){
+						$("#watchdog").html('Your song has been downloaded! Enjoy listening').fadeIn().delay(3000).fadeOut();
+						$(".expired-"+sid).removeClass('label-default').addClass('label-warning').html('Active');
+						rplayer.playSong(song_url,song_name);
+					}
+				}
+			});
+		} else {
+			rplayer.playSong(song_url,song_name);
+		}
+
 	});
 
 	$(document).on('click','#play_button',function(){rplayer.togglePlayPause()});
@@ -139,6 +162,13 @@ $(window).ready(function(){
 				}
 			});
 		}
+	});
+
+	/** Download song action */
+	$(document).on('click','.song-download-action',function(){
+		var url = $(this).data('url');
+		$("#download_frame").attr('src',baseurl+url);
+		return false;
 	});
 
 });

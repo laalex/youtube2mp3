@@ -315,3 +315,5 @@ a:hover{text-decoration: none;}
 .label-submit:hover{
   color:#fff;
 }
+
+.song-download-action {cursor:pointer;}

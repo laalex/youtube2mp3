@@ -36,7 +36,7 @@ class download extends CI_Controller{
 						$this->load->helper('youtubedl');
 						ydl_silent_download('https://www.youtube.com/watch?v='.$data->video_id,$uid);
 						//Update the song into the database as downloaded
-						$this->db->where('song_id',$data->song_id)->update('songs',array('is_downloaded'=>1,'last_updated'=>''));
+						$this->db->where('song_id',$data->song_id)->update('songs',array('is_downloaded'=>1));
 					endif;
 					$file = 'downloads/'.$uid.'/'.$data->song_name;
 					header ("Content-type: octet/stream");
@@ -50,6 +50,16 @@ class download extends CI_Controller{
 			else:
 				exit('No music for you. Sorry, but you are not allowed to download this song.');
 			endif;
+	}
+
+	public function reload_song(){
+		$this->load->helper('youtubedl');
+		$uid = $this->session->userdata('user_id');
+		$sid = $this->input->post('song_id');
+		$vid = $this->input->post('video_id');
+		ydl_silent_download('https://www.youtube.com/watch?v='.$vid,$uid,true);
+		//Update the song into the database as downloaded
+		$this->db->where('song_id',$sid)->update('songs',array('is_downloaded'=>1));
 	}
 
 }
