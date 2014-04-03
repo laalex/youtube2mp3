@@ -163,6 +163,15 @@ rplayer.seekto = function(percent){
     }
 }
 
+rplayer.jumpTo = function(secs){
+    if(rplayer.audio !== undefined){
+        rplayer.audio.currentTime = secs;
+        return true
+    }else {
+        return false;
+    }
+}
+
 rplayer.repeat = function(bool){
     if(rplayer.audio !== undefined){
         rplayer.audio.loop = bool;
@@ -171,7 +180,7 @@ rplayer.repeat = function(bool){
 }
 
 //Play song function
-rplayer.playSong = function(song_url,song_name){
+rplayer.playSong = function(song_url,song_name,seconds){
     //Load the song
     rplayer.load(song_url);
     //Toggle song play
@@ -179,6 +188,12 @@ rplayer.playSong = function(song_url,song_name){
     rplayer.cursor(rplayer.config.cursor_div,rplayer.config.counter_div,rplayer.config.duration_div);
     var song_title = document.getElementById(rplayer.config.song_title_div);
     song_title.innerHTML = song_name;
+    //Start at a given time.
+    if(seconds!==undefined){
+        setTimeout(function(){
+            rplayer.jumpTo(seconds);
+        },500);
+    }
 }
 
 /**

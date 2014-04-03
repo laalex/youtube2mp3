@@ -59,7 +59,7 @@ $(window).ready(function(){
 	/* Create playlist download */
 	$(document).on('click','#create-pack-download',function(){
 		var pid = $(this).data('playlist');
-		$("#watchdog").fadeIn();
+		$("#watchdog").fadeIn().html("Please wait while your download is generated. Note that it might take some time..");
 		$.ajax({
 			url:baseurl+'ajax/pack_download',
 			type:'POST',
@@ -67,7 +67,8 @@ $(window).ready(function(){
 			success:function(data){
 				data = $.parseJSON(data);
 				$("#watchdog").html('Your archive has been created and download should start!').fadeIn().delay(5000).fadeOut();
-				window.location = data.zip;
+				$("#download_frame").attr('src',data.zip);
+				return false;
 			}
 		});
 	});
@@ -169,6 +170,15 @@ $(window).ready(function(){
 		var url = $(this).data('url');
 		$("#download_frame").attr('src',baseurl+url);
 		return false;
+	});
+
+	/** Enable / disable app state*/
+	$(document).on('change',"#allow_storage_checkbox",function(){
+		if($(this).is(':checked')===true){
+			localStorage.setItem('allow_storage',"1");
+		} else {
+			localStorage.setItem('allow_storage',"0");
+		}
 	});
 
 });

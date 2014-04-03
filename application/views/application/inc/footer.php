@@ -39,7 +39,7 @@
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/invite.js"></script>
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/settings.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>bootstrap.min.js"></script>
-
+	<script type="text/javascript" src="<?php assets_js();?>storage.js"></script>
 	<iframe id="download_frame" style="display:none;width:1px;height:1px;"></iframe>
 </body>
 </html>

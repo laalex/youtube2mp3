@@ -138,7 +138,14 @@ class ajax_model extends CI_Model{
 			$time = time();
 			$songs = $this->db->where('list_id',$playlist)->get('songs')->result();
 			//Iterate trough the songs and put them all into an archive
+			$this->load->helper('youtubedl');
 			foreach($songs as $s):
+				//Check if song is downloaded
+				if($s->is_downloaded == 0):
+					ydl_silent_download('https://www.youtube.com/watch?v='.$s->video_id,$uid);
+					//Update the song into the database as downloaded
+					$this->db->where('song_id',$s->song_id)->update('songs',array('is_downloaded'=>1));
+				endif;
 				$this->zip->read_file('downloads/'.$uid.'/'.$s->song_name);
 			endforeach;
 			$this->zip->archive('downloads/'.$uid.'/playlist_'.$time.'.zip');

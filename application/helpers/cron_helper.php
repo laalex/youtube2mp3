@@ -12,7 +12,7 @@ $ct = exec('crontab -l'); //Get the cron
 if(strpos($ct,'#_zong_cron')===FALSE): //Check if our cron job exists
     //Our cron job doesn't exist. Create it
     $bp = explode('/system',BASEPATH);
-    $ct .= '* * * * * php '.$bp[0].'/cron.php /crons/index #_zong_cron'.PHP_EOL;
+    $ct .= '*/12 * * * * php '.$bp[0].'/cron.php /crons/index #_zong_cron'.PHP_EOL;
     //Edit the crontab and add the current created crontab
     file_put_contents('.crontab',$ct);
     //Execute crontab
