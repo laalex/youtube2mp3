@@ -263,7 +263,7 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 					$.ajax({
 						url:baseurl+'ajax/songs',
 						type:'POST',
-						data:{action:'register_song',song_title:data.file_name},
+						data:{action:'register_song',song_title:data.file_name,videourl:videourl},
 						success:function(data){
 							data = $.parseJSON(data);
 							if(data.response=='success'){

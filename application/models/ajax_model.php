@@ -98,6 +98,8 @@ class ajax_model extends CI_Model{
 			//TEMPORARY
 			switch($request_type){
 				case 'register_song':
+					parse_str( parse_url( $post['videourl'], PHP_URL_QUERY ), $vls );
+					$video_id = $vls['v'];
 					$title = $post['song_title'];
 					$hash = md5($title.$uid);
 					//Get user default playlist
@@ -106,7 +108,9 @@ class ajax_model extends CI_Model{
 						'user_id'=>$uid,
 						'song_name'=>$title,
 						'download_url'=>$hash,
-						'list_id'=>$rez->list_id
+						'list_id'=>$rez->list_id,
+						'video_id'=>$video_id,
+						'is_downloaded'=>1
 					);
 					$this->db->insert('songs',$insert);
 					$insert_id = $this->db->insert_id();

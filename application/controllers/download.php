@@ -27,11 +27,18 @@ class download extends CI_Controller{
 			$uid = $this->input->post('user_id');
 		}
 		//Get the database entry
-		$data = $this->db->where('download_url',$hash)->get('songs')->result();
+		$data = $this->db->where('download_url',$hash)->get('songs')->first_row();
 			if(!empty($data)):
-				if($data[0]->user_id==$uid):
+				if($data->user_id==$uid):
 					//Serve the MP3 file for download
-					$file = 'downloads/'.$uid.'/'.$data[0]->song_name;
+					/** Check if the file is downloaded or not */
+					if($data->is_downloaded == 0):
+						$this->load->helper('youtubedl');
+						ydl_silent_download('https://www.youtube.com/watch?v='.$data->video_id,$uid);
+						//Update the song into the database as downloaded
+						$this->db->where('song_id',$data->song_id)->update('songs',array('is_downloaded'=>1,'last_updated'=>''));
+					endif;
+					$file = 'downloads/'.$uid.'/'.$data->song_name;
 					header ("Content-type: octet/stream");
 					header ("Content-disposition: attachment; filename=".$file);
 					header("Content-Length: ".filesize($file));

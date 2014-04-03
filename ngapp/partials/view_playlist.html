@@ -18,7 +18,11 @@
 
 		<table class="table table-condensed">
 			<tr ng-repeat="song in songs">
-				<td style="vertical-align:middle">{{song.nice_name}}</td>
+				<td style="vertical-align:middle">
+					<span ng-if="song.is_downloaded == 0" class="label label-default">Expired</span>
+					<span ng-if="song.is_downloaded == 1" class="label label-warning">Active</span>
+					{{song.nice_name}}
+				</td>
 				<td style="100px">
 					<a style="width:100%;" data-url="{{song.direct_url}}" data-song-name="{{song.nice_name}}" class="pointer listen-song-action">
 				  		<span class="glyphicon glyphicon-headphones"></span>
@@ -36,11 +40,11 @@
 		<br />
 
 		</div>
-		<div ng-if="GetSoungCount() == 0">
+		<div ng-if="GetSongCount() == 0">
 		<div class="alert alert-warning" id="view-playlist-watchdog">
 			<span class="glyphicon glyphicon-fire"></span>&nbsp;Oohh.. It burns to see there are no songs out here. Go to your dashboard and download a song tagged in this playlist! As soon as you'll have one, it will be available to download here and on your mobile phone!
 		</div>
-		<a href="/#/" class="btn btn-success">Click to download a song&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a>
+		<a href="/#/" class="label label-success">Click to download a song&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 
 		<!-- endif -->
