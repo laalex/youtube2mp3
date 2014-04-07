@@ -26,11 +26,18 @@ function youtube_search(keywords,result_div){
     });
 
     request.execute(function(response) {
-        //var str = JSON.stringify(response.result);
-        $(result_div).html("");
+        var data = {};
+        data.iterator = [];
         $.each(response.result.items,function(){
-            console.log(this.snippet);
-            $(result_div).append(this.snippet.title + '<br />');
+            var entry = {};
+            entry.thumb = this.snippet.thumbnails.default.url;
+            entry.name = this.snippet.title;
+            entry.view = this.id.videoId;
+            entry.convert = "<span class='glyphicon glyphicon-download'></span>";
+            data.iterator.push(entry);
         });
+        jsnippets.load("youtube_results");
+        jsnippets.dataload(data);
+        jsnippets.replace("#video_search");
     });
 }

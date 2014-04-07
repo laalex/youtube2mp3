@@ -191,7 +191,19 @@ $(window).ready(function(){
 	$(document).on('keyup','#video-url-input',function(){
 		if($(this).val() !== '' && YT_LOADED_SUCCESSFULLY){
 			youtube_search($(this).val(),"#video_search");
+		} else {
+			$("#video_search").html("");
 		}
+	});
+	/**
+	 * Download song from youtube search
+	 */
+	$(document).on('click','.result_convert',function(){
+		var id = $(this).parent().find("[data-view]").html();
+		//Show Loading state
+		$("#video-url-button").attr('value','Loading...');
+		//Display the video and progressbar
+		start_song_download("https://www.youtube.com/watch?v="+id,"#video-download-response");
 	});
 
 });

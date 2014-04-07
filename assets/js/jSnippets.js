@@ -74,7 +74,12 @@ if(typeof window.jsnippets === 'undefined'){
                     var clone = iterator.clone();
                     $.each(this,function(k,v){
                         var domobj = $(clone).find("[data-"+k+"]");
-                        domobj.html(v);
+                        //Check object type
+                        if(domobj.prop('tagName') === 'IMG'){
+                            domobj.attr('src',v)
+                        } else {
+                            domobj.html(v);
+                        }
                     });
                     //Append the clone to the parent
                     $(iterator).parent().append(clone);
@@ -82,8 +87,12 @@ if(typeof window.jsnippets === 'undefined'){
                 iterator.remove();
             } else {
                 var domobj = $(jsnippets._loaded).find("[data-"+k+"]");
-                console.log(domobj);
-                domobj.html(v);
+                //Check object type
+                if(domobj.prop('tagName') === 'IMG'){
+                    domobj.attr('src',v)
+                } else {
+                    domobj.html(v);
+                }
             }
 
         });
@@ -107,3 +116,9 @@ if(typeof window.jsnippets === 'undefined'){
         jsnippets.unload();
     }
 }
+
+/**
+ * CHANGELOG
+ * ---------
+ * 0.1 - Added image src support for image tags.
+ */
