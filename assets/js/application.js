@@ -7,6 +7,8 @@
  */
 //Init the MP3 player
 rplayer.init("song_time","song_time_elapsed","mp_elapsed","mp_total","play_button","mp3_songname","volume_selected","volume_cursor");
+//Init jSnippets
+jsnippets.init('/assets/snippets.html');
 
 /**
  * Click events and AJAX calls
@@ -178,6 +180,17 @@ $(window).ready(function(){
 			localStorage.setItem('allow_storage',"1");
 		} else {
 			localStorage.setItem('allow_storage',"0");
+		}
+	});
+
+	/**
+	 * Youtube search
+	 * ---------------------------------------------
+	 * Perform the search while typing in keywords on the download video input
+	 */
+	$(document).on('keyup','#video-url-input',function(){
+		if($(this).val() !== '' && YT_LOADED_SUCCESSFULLY){
+			youtube_search($(this).val(),"#video_search");
 		}
 	});
 

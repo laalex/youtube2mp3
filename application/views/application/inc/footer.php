@@ -29,8 +29,10 @@
 	<script type="text/javascript">
 		var baseurl = "<?php print base_url(); ?>index.php/";
 		var assets_img = "<?php print assets_img(); ?>";
+		YT_LOADED_SUCCESSFULLY = false;
 	</script>
 	<!-- Angualr controllers -->
+	<script type="text/javascript" src="<?php assets_js();?>jSnippets.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>mp3player.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>application.js"></script>
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/dashboard.js"></script>
@@ -40,6 +42,8 @@
 	<script type="text/javascript" src="<?php print base_url();?>ngapp/controllers/settings.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>storage.js"></script>
+	<script type="text/javascript" src="<?php assets_js();?>youtube_api.js"></script>
+	<script src="https://apis.google.com/js/client.js?onload=loadYTApi"></script>
 	<iframe id="download_frame" style="display:none;width:1px;height:1px;"></iframe>
 </body>
 </html>
