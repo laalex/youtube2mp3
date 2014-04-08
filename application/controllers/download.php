@@ -4,10 +4,12 @@ class download extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-		//Check if user is logged in
-		if(!$this->ion_auth->logged_in()):
-			//The user is logged in -> Redirect to the application
-			redirect(base_url().'login');
+		if(!$this->uri->segment(5)=="MOBILE_ALLOWED_FROM"):
+			//Check if user is logged in
+			if(!$this->ion_auth->logged_in()):
+				//The user is logged in -> Redirect to the application
+				redirect(base_url().'login');
+			endif;
 		endif;
 		//Include the header file
 		$this->load->model('application_model');
@@ -24,7 +26,7 @@ class download extends CI_Controller{
 		//Get the user ID
 		$uid = $this->session->userdata('user_id');
 		if($uid == null || empty($uid)){
-			$uid = $this->input->post('user_id');
+			$uid = $this->uri->segment(4);
 		}
 		//Get the database entry
 		$data = $this->db->where('download_url',$hash)->get('songs')->first_row();
