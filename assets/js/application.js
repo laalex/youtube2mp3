@@ -140,7 +140,7 @@ $(window).ready(function(){
 		var email = $("#invite-email").val();
 		$.ajax({
 			type:'POST',
-			url:baseurl+'settings/change_password',
+			url:baseurl+'settings/put_invite',
 			data:{email:email},
 			success:function(data){
 				data = $.parseJSON(data);
