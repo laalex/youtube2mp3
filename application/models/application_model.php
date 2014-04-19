@@ -125,7 +125,7 @@ class application_model extends CI_Model{
 		$invite = $this->db->where('invite_id',$id)->get('invitations')->first_row();
 		$email = $username = $invite->email;
 		//Generate password:
-		$password = 'password';
+		$password = $this->generateRandomString(8);
 		/** Register user process */
 		$additional_data = array(
 				'first_name' => '',
@@ -146,14 +146,17 @@ class application_model extends CI_Model{
 			$data['password'] = $password;
 			$view = $this->load->view('emails/confirm_account',$data,true);
 			$this->email->from('no-reply@zonglist.com', 'ZongList');
-		    $this->email->to('roshkattu94@gmail.com');
+		       $this->email->to('roshkattu94@gmail.com');
 
-		    $this->email->subject('ZongList Account information');
-		    $this->email->message($view);
+		       $this->email->subject('ZongList Account information');
+		       $this->email->message($view);
 
-		    $this->email->send();
+		       $this->email->send();
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("auth/login", 'refresh');
+		} else {
+			$this->session->set_flashdata('message', "The account cannot be created!");
 			redirect("auth/login", 'refresh');
 		}
 	}
@@ -177,4 +180,13 @@ class application_model extends CI_Model{
 		endif;
 	}
 
+
+	private function generateRandomString($length = 10) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~-<>_+';
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+	    }
+	    return $randomString;
+	}
 }

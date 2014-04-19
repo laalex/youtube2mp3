@@ -56,7 +56,7 @@ class application extends CI_Controller{
 
 	/** Invitation accept */
 	public function accept_invite(){
-		$id = $this->uri->segment(4);
+		$id = $this->uri->segment(3);
 		$this->application_model->accept_invitation($id);
 	}
 

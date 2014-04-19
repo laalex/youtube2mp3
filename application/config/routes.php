@@ -57,7 +57,7 @@ $route['invitations/getInvitations'] = 'application/get_invitations';
 $route['settings/change_password'] = 'application/change_password';
 $route['settings/put_invite'] = 'application/put_invitation';
 /* More app routes */
-$route['application/accept_invite/(:num)'] = 'application/accept_invite';
+$route['application/accept_invite/(:any)'] = 'application/accept_invite';
 
 
 
