@@ -2,12 +2,8 @@
 /**
  * Email configuration
  */
-$config['protocol']    = 'smtp';
-$config['smtp_host']    = 'ssl://smtp.gmail.com';
-$config['smtp_port']    = '465';
-$config['smtp_timeout'] = '15';
-$config['smtp_user']    = 'roshkattu94@gmail.com';
-$config['smtp_pass']    = '<Androidsdk_93_1>';
+$config['protocol'] = 'sendmail';
+$config['mailpath'] = '/usr/sbin/sendmail';
 $config['charset']    = 'utf-8';
 $config['newline']    = "\r\n";
 $config['mailtype'] = 'html'; // or html
