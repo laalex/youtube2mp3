@@ -1,6 +1,18 @@
 /*
 * Application JavaScript
 */
+
+/**
+ * Objects init
+ */
+//Init the MP3 player
+rplayer.init("song_time","song_time_elapsed","mp_elapsed","mp_total","play_button","mp3_songname","volume_selected","volume_cursor");
+//Init jSnippets
+jsnippets.init('/assets/snippets.html');
+
+/**
+ * Click events and AJAX calls
+ */
 $(window).ready(function(){
 
 	/* Playlist Manager */
@@ -49,7 +61,7 @@ $(window).ready(function(){
 	/* Create playlist download */
 	$(document).on('click','#create-pack-download',function(){
 		var pid = $(this).data('playlist');
-		$("#watchdog").fadeIn();
+		$("#watchdog").fadeIn().html("Please wait while your download is generated. Note that it might take some time..");
 		$.ajax({
 			url:baseurl+'ajax/pack_download',
 			type:'POST',
@@ -57,7 +69,8 @@ $(window).ready(function(){
 			success:function(data){
 				data = $.parseJSON(data);
 				$("#watchdog").html('Your archive has been created and download should start!').fadeIn().delay(5000).fadeOut();
-				window.location = data.zip;
+				$("#download_frame").attr('src',data.zip);
+				return false;
 			}
 		});
 	});
@@ -83,16 +96,114 @@ $(window).ready(function(){
 		return false;
 	});
 
+	/** RPlayer MP3 lib. */
 	$(document).on('click','.listen-song-action',function(){
-		var audio = document.getElementById('musicplayer');
 		var song_url = $(this).data('url');
-		audio.setAttribute('src',song_url);
-		audio.load();
-		audio.play();
+		var song_name = $(this).data('song-name');
+		//Check song status
+		var status = $(this).data('song-status');
+		var sid = $(this).data('song-id');
+		var vid = $(this).data('video-id');
+		if(status==0){
+			//The song is not downloaded. Cast download
+			$("#watchdog").html('The song is downloading and will be played when completed.').fadeIn().delay(5000).fadeOut();
+			$.ajax({
+				url:baseurl+'download/reload_song',
+				type:'POST',
+				data:{song_id:sid,video_id:vid},
+				success:function(data){
+					data = $.parseJSON(data);
+					if(data=='ok'){
+						$("#watchdog").html('Your song has been downloaded! Enjoy listening').fadeIn().delay(3000).fadeOut();
+						$(".expired-"+sid).removeClass('label-default').addClass('label-warning').html('Active');
+						rplayer.playSong(song_url,song_name);
+					}
+				}
+			});
+		} else {
+			rplayer.playSong(song_url,song_name);
+		}
+
 	});
 
+	$(document).on('click','#play_button',function(){rplayer.togglePlayPause()});
+
+	$(document).on('click',"#toggle_mp3",function(){$("#mp3player").slideToggle('slow');});
+
+	/** Video close */
 	$(document).on('click','.video-close',function(){
 		$(this).parent().hide();
+	});
+
+	/** Send friend invitation */
+	$(document).on('submit','#user-invite-form',function(){
+		var email = $("#invite-email").val();
+		$.ajax({
+			type:'POST',
+			url:baseurl+'settings/change_password',
+			data:{email:email},
+			success:function(data){
+				data = $.parseJSON(data);
+				$("#watchdog").html(data).fadeIn().delay(5000).fadeOut();
+			}
+		});
+	});
+
+	/**Password change action - Settings */
+	$(document).on('click','#password-change-action',function(){
+		var p = $('#password-change').val();
+		var o = $("#password-change-old").val();
+		if(p=='' || o == ''){alert('Please complete both password fields');} else {
+			//Change password
+			$.ajax({
+				type:'POST',
+				url:baseurl+'settings/change_password',
+				data:{password:p,old_password:o},
+				success:function(data){
+					data = $.parseJSON(data);
+					$("#watchdog").html(data).fadeIn().delay(5000).fadeOut();
+				}
+			});
+		}
+	});
+
+	/** Download song action */
+	$(document).on('click','.song-download-action',function(){
+		var url = $(this).data('url');
+		$("#download_frame").attr('src',baseurl+url);
+		return false;
+	});
+
+	/** Enable / disable app state*/
+	$(document).on('change',"#allow_storage_checkbox",function(){
+		if($(this).is(':checked')===true){
+			localStorage.setItem('allow_storage',"1");
+		} else {
+			localStorage.setItem('allow_storage',"0");
+		}
+	});
+
+	/**
+	 * Youtube search
+	 * ---------------------------------------------
+	 * Perform the search while typing in keywords on the download video input
+	 */
+	$(document).on('keyup','#video-url-input',function(){
+		if($(this).val() !== '' && YT_LOADED_SUCCESSFULLY){
+			youtube_search($(this).val(),"#video_search");
+		} else {
+			$("#video_search").html("");
+		}
+	});
+	/**
+	 * Download song from youtube search
+	 */
+	$(document).on('click','.result_convert',function(){
+		var id = $(this).parent().find("[data-view]").html();
+		//Show Loading state
+		$("#video-url-button").attr('value','Loading...');
+		//Display the video and progressbar
+		start_song_download("https://www.youtube.com/watch?v="+id,"#video-download-response");
 	});
 
 });
@@ -115,6 +226,10 @@ $(window).ready(function(){
 			templateUrl:'/ngapp/partials/view_playlist.html',
 			controller:'viewplaylistController'
 		}).
+		when('/invite',{
+			templateUrl:'/ngapp/partials/invite.html',
+			controller:'inviteController'
+		}).
 		when('/settings',{
 			templateUrl:'/ngapp/partials/settings.html',
 			controller:'settingsController'
@@ -125,7 +240,7 @@ $(window).ready(function(){
 	}]);
 
 
-/* 
+/*
 * Application functions
 */
 
@@ -213,7 +328,7 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 					$.ajax({
 						url:baseurl+'ajax/songs',
 						type:'POST',
-						data:{action:'register_song',song_title:data.file_name},
+						data:{action:'register_song',song_title:data.file_name,videourl:videourl},
 						success:function(data){
 							data = $.parseJSON(data);
 							if(data.response=='success'){

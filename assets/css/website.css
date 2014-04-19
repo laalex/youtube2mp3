@@ -28,3 +28,9 @@
 	width:400px;
 	margin:0 auto;
 }
+
+.jumbotron {
+	background: #FF9F2E;
+	color: #fff;
+	text-shadow:1px 1px #1d1d1d;
+}

@@ -7,7 +7,7 @@ class api extends CI_Controller{
 	* =============================
 	* -1 : Empty array/response from server
 	*  0 : No error! Success code.
-	* 
+	*
 	*/
 
 	protected $_uid = null;
@@ -55,6 +55,10 @@ class api extends CI_Controller{
 	public function get_playlists(){
 		$playlists = $this->db->where('user_id',$this->_uid)->get('playlists')->result();
 		if(!empty($playlists)):
+			foreach($playlists as &$pl):
+				$count = $this->db->query("SELECT COUNT(*) as count FROM songs WHERE list_id='".$pl->list_id."'")->first_row();
+				$pl->count = $count->count;
+			endforeach;
 			$return = array('result'=>'success','error'=>0,'data'=>$playlists);
 			print json_encode($return);
 		else:

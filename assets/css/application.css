@@ -186,3 +186,224 @@ body {
 .active{
   color:#000;
 }
+
+/** Mp3 player css */
+#mp3player {
+  width: 100%;
+  height:60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right:0;
+  background: #1d1d1d;
+  z-index: 9999;
+  border-top:1px solid #000;
+  color:#fff;
+  padding:10px;
+  text-align: center;
+  font-size:12px;
+}
+
+#player_controls {
+  margin-top:5px;
+}
+
+#song_time {
+  display: inline-block;
+  width:300px;
+  height: 8px;
+  text-align: left;
+  padding:0;
+}
+
+#song_name,#mp3_songname {
+  display: inline-block;
+  width: 400px;
+  height: 15px
+}
+
+#song_time_elapsed {
+  height:8px;
+  width:0px;
+  padding:0;
+  display: block;
+}
+
+#elapsed_time{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size:26px;
+  text-shadow:1px 0px 0px #000;
+}
+
+#mp_elapsed {
+  display: inline-block;
+  font-size: 20px;
+  color:#8d8d8d;
+}
+
+#mp_total {
+  display: inline-block;
+}
+
+#volume_control {
+  width:150px;
+  height: 8px;
+  position: absolute;
+  left:10px;
+  bottom: 35px;
+  vertical-align: middle;
+  padding:0;
+  margin:0;
+  text-align: left;
+}
+
+#volume_cursor{
+  height:8px;
+  width:135px;
+  padding:0;
+  display: inline-block;
+  line-height: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+#volume_selected {
+  height:8px;
+  width:0%;
+  display: block;
+  z-index:8888;
+  cursor: pointer;
+}
+
+#play_button,#song_time_elapsed,#song_time{
+  cursor: pointer;
+}
+
+#mp3player{cursor: pointer !important;}
+a.pointer{cursor:pointer;}
+
+/**
+ * Overrides for bootstrap
+ */
+
+a:hover{text-decoration: none;}
+.table {
+  font-size:13px;
+}
+
+.table tr:hover{
+  background:#f9f9f9;
+}
+
+#download_playlist{
+  display: block;
+  font-weight: bold;
+  font-size:13px !important;
+}
+.label-download-playlist{
+  padding:10px 20px !important;
+  font-sie:14px !important;
+}
+.label-submit{
+  font-size:12px;font-weight: bold;
+  color:#fff;
+  cursor: pointer;
+  padding:3px 10px;
+}
+.label-submit:hover{
+  color:#fff;
+}
+
+.song-download-action {cursor:pointer;}
+
+#watchdog{
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  /* left: 240px; */
+  z-index: 10000;
+  background: #1d1d1d;
+  color: #fff;
+  font-size: 12px;
+  border: 1px solid #000;
+  opacity: .7;
+  text-align: center;
+}
+
+.no-radius{border-radius:0 !important;}
+
+input[type=checkbox].css-checkbox {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height:1px;
+  width:1px;
+  margin:-1px;
+  padding:0;
+  border:0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+  padding-left:20px;
+  height:15px;
+  display:inline-block;
+  line-height:15px;
+  background-repeat:no-repeat;
+  background-position: 0 0;
+  font-size:15px;
+  vertical-align:middle;
+  cursor:pointer;
+  color:#1d1d1d;
+  font-weight: normal;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+  background-position: 0 -15px;
+}
+
+.css-label{ background-image:url(http://csscheckbox.com/checkboxes/lite-gray-check.png); }
+
+/** Youtube search */
+.youtube_results{
+  color:#1d1d1d;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size:13px;
+}
+
+.youtube_results .result_entry {
+  margin-bottom:10px;
+}
+
+.youtube_results .result_entry img {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius:50%;
+}
+
+.youtube_results .result_entry .result_convert{
+  width: 44px !important;
+  height: 44px !important;
+  border-radius:50%;
+  background:#c1c1c1;
+  color:#fff;
+  display: inline-block;
+  text-align: center;
+  margin:0;padding:0;
+  padding-top:3px;
+  vertical-align: middle !important;
+  font-size:26px;
+  cursor: pointer;
+  line-height: 44px;
+  margin-right:10px;
+}
+
+.youtube_results .result_entry .result_convert:hover{
+  background: #99CC00;
+}
+
+.youtube_results .result_entry .result_name{
+  padding-left:10px;
+}

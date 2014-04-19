@@ -1,11 +1,11 @@
-	<a href="/#/playlists" id="add-new-playlist" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> &nbsp; Click here to create a playlist</a>
+	<a href="/#/playlists" id="add-new-playlist" class="label label-success"><span class="glyphicon glyphicon-ok"></span> &nbsp; Click here to create a playlist</a>
 	<!-- Playlist modal -->
 	<div class="closed" id="add-new-playlist-form">
 	<br />
 		<form id="new-playlist-form" ng-submit="addPlaylist()">
 	      	<input type="text" ng-model="name" placeholder="Playlist name" class="form-control">
 	      	<br />
-	      	<input type="submit" value="Create playlist" class="btn btn-success">
+	      	<input type="submit" value="Create playlist" class="btn label-success label-submit">
 	    </form>
 	</div>
 	<hr />
@@ -15,22 +15,22 @@
 		</thead>
 
 			<tr ng-repeat="playlist in playlists">
-				
-				<td width="50%">
+
+				<td width="80%">
 					<h4 class="label label-success">{{playlist.name}}</h4>&nbsp;<label class="label label-default" ng-if="playlist.default == 1">Default playlist</label>
 				</td>
 				<td>
-					<a href="/dashboard/#/view/{{playlist.list_id}}" class="btn btn-success btn-xs" style="width:100px">View playlist</a>
+					<a href="/dashboard/#/view/{{playlist.list_id}}" class="label label-success btn-xs" >View playlist</a>
 				</td>
 				<td>
-					<a href="/dashboard/#/playlists" data-pid="{{playlist.list_id}}" class="btn btn-warning btn-xs confirm" style="width:100px">Remove</a>
+					<a href="/dashboard/#/playlists" data-pid="{{playlist.list_id}}" class="label label-warning btn-xs confirm" >Remove</a>
 				</td>
 				<td>
-					<a href="/dashboard/#/playlists" data-id="{{playlist.list_id}}" ng-click="makeDefault()" style="width:100px" class="btn btn-default btn-xs">Make default</a>
+					<a href="/dashboard/#/playlists" data-id="{{playlist.list_id}}" ng-click="makeDefault()"  class="label label-default btn-xs">Make default</a>
 				</td>
-				
+
 			</tr>
-	</table> 
+	</table>
 
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-dialog modal-sm">

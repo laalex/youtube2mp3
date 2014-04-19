@@ -17,9 +17,7 @@
       <div class="form-group">
         <input type="password" placeholder="Password" class="form-control" name="password">
       </div>
-      <button type="submit" class="btn btn-success">Sign in</button>
-      <span style="color:#fff">&nbsp;or&nbsp;</span>
-      <a href="<?php print base_url();?>register" class="btn btn-primary">Sign up</a>
+      <button type="submit" class="btn btn-success">SIGN IN</button>
      <?php echo form_close();?>
   </div><!--/.navbar-collapse -->
 </div>
@@ -33,7 +31,6 @@
     <h2>Grab your music to your phone in just 3 clicks. As easy as that</h2>
     <h4>download the application and get your MP3 songs instantly</h4>
     <br />
-    <a href="<?php print base_url();?>register"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok"></span> &nbsp; CREATE ACCOUNT</div></a>
     <br />
   </div>
 </div>
@@ -64,15 +61,14 @@
 <div class="container center">
   <h1>Download the ZongList application for Android</h1>
   <br />
-  <p>Get all your music to your mobile phone in one simple click. 
+  <p>Get all your music to your mobile phone in one simple click.
   <br />
-  Click the button below and get started right away</p>
+  Download the application from Android Market</p>
   <br />
-  <a href="<?php base_url();?>assets/apk/beta-zonglist.apk"><div class="btn btn-success btn-lg"><span class="glyphicon glyphicon-phone"></span>&nbsp;DOWNLOAD</div></a>
 </div>
 <hr>
 
 
 <footer class="container">
-  <p>&copy; ZongList. A project by <a href="mailto:roshkattu94@gmail.com" target="_blank">Alexandru Lamba</a></p>
+  <p>Copyright &copy; ZongList. All rights reserved</p>
 </footer>
