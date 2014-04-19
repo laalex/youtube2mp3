@@ -104,12 +104,12 @@ class application_model extends CI_Model{
 		$view = $this->load->view('emails/invite',$data,true);
 
 		$this->email->from('no-reply@zonglist.com', 'ZongList');
-	    $this->email->to('roshkattu94@gmail.com');
+	       $this->email->to($mail);
 
-	    $this->email->subject('ZongList.com Invitation');
-	    $this->email->message($view);
+	       $this->email->subject('ZongList.com Invitation');
+	       $this->email->message($view);
 
-	    $this->email->send();
+	       $this->email->send();
 	}
 
 	/**
@@ -146,9 +146,9 @@ class application_model extends CI_Model{
 			$data['password'] = $password;
 			$view = $this->load->view('emails/confirm_account',$data,true);
 			$this->email->from('no-reply@zonglist.com', 'ZongList');
-		       $this->email->to('roshkattu94@gmail.com');
+		       $this->email->to($email);
 
-		       $this->email->subject('ZongList Account information');
+		       $this->email->subject('ZongList Account Information');
 		       $this->email->message($view);
 
 		       $this->email->send();
