@@ -140,6 +140,8 @@ class application_model extends CI_Model{
 				//Create a default playlist for the user
 				$this->load->database();
 				$this->db->insert('playlists',array('name'=>'Default','user_id'=>$user_id,'default'=>1));
+				//Create user directory
+				mkdir('downloads/'.$user_id);
 			}
 			/** Dispatch email to the user with his credentials */
 			$data['username'] = $email;

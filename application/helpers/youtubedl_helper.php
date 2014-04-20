@@ -115,7 +115,7 @@
       $file = str_replace(' ', '_', $file);
       $file = str_replace('.mp4','',$file);
       $mfile = 'downloads/'.$id.'/'.$file;
-      $cmd .= '-i '.escapeshellarg($fpath).' -b:a 192K -vn '.escapeshellarg($mfile).'.mp3';
+      $cmd .= '-i '.escapeshellarg($fpath).' -b:a 128K -vn '.escapeshellarg($mfile).'.mp3';
       $cmd = escapeshellcmd($cmd);
       print system($cmd);
       //File converted. Remove the mp4 file
