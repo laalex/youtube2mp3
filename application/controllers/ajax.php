@@ -30,4 +30,9 @@ class ajax extends CI_Controller{
 	public function pack_download(){
 		$this->ajax_model->pack_download();
 	}
+
+	/** Submit feedback */
+	public function submit_feedback(){
+		$this->ajax_model->get_user_feedback();
+	}
 }

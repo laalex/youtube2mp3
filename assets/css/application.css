@@ -407,3 +407,42 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 .youtube_results .result_entry .result_name{
   padding-left:10px;
 }
+
+
+.feedback-btn{
+  position: fixed;
+  right:-5px;
+  bottom:60px;
+  height: 40px;
+  box-shadow: none !important;
+  border-radius: 0;
+}
+
+.joyride-tip-guide {
+  z-index: 9999;
+}
+
+.joyride-next-tip, .joyride-next-tip:hover {
+  outline: none !important;
+  background: #900 !important;
+  border: 1px solid #900 !important;
+}
+.joyride-content-wrapper {
+  background: #f1f1f1;
+  box-shadow: 0 0 15px #1d1d1d;
+  border: 1px solid #1d1d1d !important;
+  color: #555;
+}
+
+.joyride-close-tip {
+  display: none;
+}
+
+.td-mid-android {
+  text-align: center !important;
+  width: 25% !important;
+  margin:0 20px !important;
+  background: #f1f1f1;
+  border-left: 1px dashed #fff;
+  border-right:1px dashed #fff;
+}

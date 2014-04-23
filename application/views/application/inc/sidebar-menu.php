@@ -25,10 +25,12 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
-            <li><a href="<?php print base_url();?>dashboard/#/playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
-            <li><a href="<?php print base_url();?>dashboard/#/invite"><span class="glyphicon glyphicon-user"></span>&nbsp;Invite friend</a></li>
+            <li id="playlist_tut"><a href="<?php print base_url();?>dashboard/#/playlists"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Playlists</a></li>
+            <li id="invite_tut"><a href="<?php print base_url();?>dashboard/#/invite"><span class="glyphicon glyphicon-user"></span>&nbsp;Invite friend</a></li>
             <li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>
             <hr />
             <li><a href="<?php print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
+            <hr />
+            <li><a href="<?php print base_url();?>dashboard/#/android" style="color:#900 !important"><span class="glyphicon glyphicon-download"></span>&nbsp;Android APP</a></li>
           </ul>
         </div>

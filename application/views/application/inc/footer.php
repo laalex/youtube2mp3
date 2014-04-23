@@ -25,13 +25,48 @@
 			</span>
 		</div>
 	</div>
+
+	<ol id="tutorial_id" style="display:none;">
+	  <li data-id="video-url-input">
+	  	Write here your <b>song name</b> or paste in your <b>YouTube URL</b> for the song you want to download.
+	  	<br />
+	  	After that, hit ENTER or click <b>Download vdeo</b> to start
+	  	<br /><br />
+	  </li>
+
+	  <li data-id="toggle_mp3">
+	  	<b>Toggle Player</b> is going to hide/show the MP3 player.<br />
+	  	<b>Hide Downloads</b> is going to show/hide download boxes when you are downloading content.<br />
+	  	<b>Dashboard</b> will get you back here :-)
+	  	<br /><br />
+	  </li>
+
+	  <li data-id="playlist_tut" data-options="tipLocation:right">
+	  	Use <b>Playlists</b> to create containers for your songs and categorize them.
+	  	<br /><br />
+	  </li>
+
+	  <li data-id="invite_tut" data-options="tipLocation:right">
+	  	<b>Invite a friend</b> to join <b>ZongList</b> network. Write in his email address so he can get an account ;)
+	  	<br /><br />
+	  </li>
+
+	  <li data-id="mp3_songname" data-options="tipLocation:top" data-button="I got it!">
+	  	<b>ZongPlayer</b> allows you to listen your songs right here after you download them.
+	  	<br /><br />
+	  </li>
+	</ol>
+
 	<!-- SCRIPTS -->
 	<script type="text/javascript">
 		var baseurl = "<?php print base_url(); ?>index.php/";
 		var assets_img = "<?php print assets_img(); ?>";
+		var first_visit = "<?php print $this->session->userdata('first_visit');  ?>";
 		YT_LOADED_SUCCESSFULLY = false;
 	</script>
 	<!-- Angualr controllers -->
+	<script type="text/javascript" src="<?php assets_js();?>feedback.min.js"></script>
+	<script type="text/javascript" src="<?php assets_js();?>jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>jSnippets.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>mp3player.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>application.js"></script>

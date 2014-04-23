@@ -15,6 +15,15 @@ jsnippets.init('/assets/snippets.html');
  */
 $(window).ready(function(){
 
+	/**
+	 * Feedbakc plugin
+	 */
+	$.feedback({
+	     ajaxURL: baseurl+'ajax/submit_feedback',
+	     html2canvasURL: '/assets/js/html2canvas.min.js',
+	     initButtonText:'Send feedback or report bug'
+	 });
+
 	/* Playlist Manager */
 
 	//Create new playlist - Show playlist form
@@ -234,6 +243,10 @@ $(window).ready(function(){
 			templateUrl:'/ngapp/partials/settings.html',
 			controller:'settingsController'
 		}).
+		when('/android',{
+			templateUrl:'/ngapp/partials/android.html',
+			controller:'dashboardController'
+		}).
 		otherwise({
 			redirectTo:'/'
 		});
@@ -350,3 +363,16 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 		}
 	}
 }
+
+
+$(window).load(function(){
+console.log(first_visit);
+if(first_visit=='true'){
+	/**
+	 * Tutorial
+	 */
+	$("#tutorial_id").joyride({
+		autoStart : true
+	});
+}
+});

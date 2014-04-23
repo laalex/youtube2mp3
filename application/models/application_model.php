@@ -191,4 +191,17 @@ class application_model extends CI_Model{
 	    }
 	    return $randomString;
 	}
+
+
+	public function set_first_visit(){
+		$id = $this->session->userdata('user_id');
+		$user = $this->db->where('id',$id)->get('users')->first_row();
+		if($user->first_visit == 0){
+			$this->db->where('id',$id)->update('users',array('first_visit'=>1));
+			return 'true';
+		} else {
+			return 'false';
+		}
+		exit();
+	}
 }

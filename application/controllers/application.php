@@ -10,6 +10,8 @@ class application extends CI_Controller{
 			redirect(base_url().'login');
 		endif;
 		$this->load->model('application_model');
+		//Get first visit
+		$this->session->set_userdata('first_visit',$this->application_model->set_first_visit());
 	}
 
 	//Default website

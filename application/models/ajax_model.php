@@ -155,4 +155,15 @@ class ajax_model extends CI_Model{
 		endif;
 	}
 
+
+	/**
+	 * Get users feedback
+	 */
+	public function get_user_feedback(){
+		$data = json_decode(file_get_contents("php://input"),true);
+		$b64 = base64_encode(serialize($data));
+		$this->db->insert('feedback',array('feedback_data'=>$b64));
+		print json_encode("Feedback sent! Thank you!");
+	}
+
 }
