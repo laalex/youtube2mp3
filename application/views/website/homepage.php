@@ -42,18 +42,21 @@
   <div class="row">
     <div class="col-md-4 center">
       <h2><span class="glyphicon glyphicon-user"></span></h2>
-      <h3>Create account</h3>
-      <p>First of all create an account to keep track of your download history and build download playlists</p>
+      <h3>LOGIN</h3>
+      <p>Login to your account and manage your playlists</p>
+      <p>Customize everything to take advantage of our application</p>
     </div>
     <div class="col-md-4 center">
       <h2><span class="glyphicon glyphicon-download-alt"></span></h2>
-      <h3>Download application</h3>
-      <p>Get the Android application, log in, and start downloading</p>
+      <h3>Android Application</h3>
+      <p>Get the Android application to download music to your device</p>
+      <p>One song at a time or an entire playlist</p>
    </div>
     <div class="col-md-4 center">
       <h2><span class="glyphicon glyphicon-headphones"></span></h2>
-      <h3>Listen</h3>
-      <p>What next? Nothing more. Sit back and relax enjoying the music on your android device</p>
+      <h3>ENJOY</h3>
+      <p>Enjoy your music on your PC, laptop, tablet or phone</p>
+      <p>ZongList offers you this comfort</p>
     </div>
   </div>
   <br /><br />
