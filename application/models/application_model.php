@@ -156,7 +156,7 @@ class application_model extends CI_Model{
 		       $this->email->send();
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth/login", 'refresh');
+			redirect("web/account_created", 'refresh');
 		} else {
 			$this->session->set_flashdata('message', "The account cannot be created!");
 			redirect("auth/login", 'refresh');

@@ -20,4 +20,9 @@ class web extends CI_Controller{
 		$this->website_model->_render('website/homepage');
 	}
 
+	public function account_created(){
+		$data['title'] = $this->website_model->get_page_title();
+		$this->website_model->_render('website/account_created');
+	}
+
 }
