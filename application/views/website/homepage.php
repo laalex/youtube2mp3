@@ -8,6 +8,7 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="#" id="project-title"><img src="<?php print base_url();?>assets/img/logo.png"></a>
+    <span class="beta">1.0 BETA</span>
   </div>
   <div class="navbar-collapse collapse">
     <?php echo form_open("auth/login",array('class'=>'navbar-form navbar-right'));?>
@@ -17,7 +18,7 @@
       <div class="form-group">
         <input type="password" placeholder="Password" class="form-control" name="password">
       </div>
-      <button type="submit" class="btn btn-success">SIGN IN</button>
+      <button type="submit" class="btn btn-success">LOGIN</button>
      <?php echo form_close();?>
   </div><!--/.navbar-collapse -->
 </div>
@@ -58,17 +59,19 @@
   <br /><br />
 </div>
 <hr>
+
 <div class="container center">
-  <h1>Download the ZongList application for Android</h1>
+  <h3>ZongList 1.0 BETA</h3>
   <br />
-  <p>Get all your music to your mobile phone in one simple click.
-  <br />
-  Download the application from Android Market</p>
+  <p>ZongList is currently BETA and released to a small public. There might be a lot of glitches and problems, so we encourage you to offer us the propper feedback so we can fix everything for you and offer you the best experience. Come back over here to keep in touch with our release notes.
   <br />
 </div>
 <hr>
 
 
-<footer class="container">
+<footer class="container" style="text-align:center">
   <p>Copyright &copy; ZongList. All rights reserved</p>
+  <br />
+  <a href="/tos">Terms of Use</a> &middot; <a href="https://www.facebook.com/ZongList" target="_blank">FaceBook Page</a> &middot; <a href="https://www.twitter.com/ZongList" target="_blank">Follow us on Twitter</a>
+  <br /><br />
 </footer>

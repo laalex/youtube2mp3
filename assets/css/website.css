@@ -1,4 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+@import url(http://fonts.googleapis.com/css?family=Squada+One);
+body{
+	color:#fff;
+	background-color:#1d1d1d;
+  	background: url('/assets/img/noise_bg.png') repeat;
+}
+hr {
+  border:none;
+  border-bottom:1px solid #151515;
+}
 /*
 * Helper classes
 */
@@ -30,7 +40,13 @@
 }
 
 .jumbotron {
-	background: #FF9F2E;
+	background: #f80;
 	color: #fff;
 	text-shadow:1px 1px #1d1d1d;
+}
+
+.beta {
+  color:#fff;
+  padding-left:60px;
+  font-family: 'Squada One', 'cursive';
 }
