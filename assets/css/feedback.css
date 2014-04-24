@@ -1,9 +1,5 @@
 .feedback-btn {
-  font-size: 14px;
-  position: fixed;
-  bottom: -3px;
-  right: 60px;
-  width: auto;
+  display:none;
 }
 #feedback-module p {  font-size: 13px }
 #feedback-note-tmp {

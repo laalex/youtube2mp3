@@ -8,6 +8,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#" id="project-title"><img src="<?php print base_url();?>assets/img/logo.png"></a>
+          <span class="beta">1.0 BETA</span>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -31,6 +32,10 @@
             <hr />
             <li><a href="<?php print base_url();?>logout"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Logout</a></li>
             <hr />
-            <li><a href="<?php print base_url();?>dashboard/#/android" style="color:#900 !important"><span class="glyphicon glyphicon-download"></span>&nbsp;Android APP</a></li>
+            <li><a href="<?php print base_url();?>dashboard/#/android" style="color:#690 !important"><span class="glyphicon glyphicon-download"></span>&nbsp;Android APP</a></li>
+            <hr />
+            <li>
+              <a href="" onclick="dispatchFeedback()"><span class="glyphicon glyphicon-flag"></span>&nbsp;Send feedback</a>
+            </li>
           </ul>
         </div>

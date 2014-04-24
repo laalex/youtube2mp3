@@ -10,6 +10,10 @@ rplayer.init("song_time","song_time_elapsed","mp_elapsed","mp_total","play_butto
 //Init jSnippets
 jsnippets.init('/assets/snippets.html');
 
+function dispatchFeedback(){
+	$('.feedback-btn').trigger('click');
+}
+
 /**
  * Click events and AJAX calls
  */
@@ -21,8 +25,11 @@ $(window).ready(function(){
 	$.feedback({
 	     ajaxURL: baseurl+'ajax/submit_feedback',
 	     html2canvasURL: '/assets/js/html2canvas.min.js',
-	     initButtonText:'Send feedback or report bug'
-	 });
+	     initButtonText:'Send feedback or report bug',
+	     onClose: function(){
+	     	$('.feedback-btn').hide();
+	     }
+	});
 
 	/* Playlist Manager */
 

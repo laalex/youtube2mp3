@@ -18,7 +18,7 @@ class api extends CI_Controller{
 		parent::__construct();
 		$_request = $this->input->server('REQUEST_METHOD');
 		if($_request !== 'POST'):
-			http_response_code(403);
+			//http_response_code(403);
 			exit('GET_NOT_ALLOWED');
 		endif;
 		$post = $this->input->post();
@@ -27,12 +27,12 @@ class api extends CI_Controller{
  			$post = json_decode($data,true);
 		}
 		if(empty($post['user']) || empty($post['pass'])):
-			http_response_code(403);
+			//http_response_code(403);
 			print json_encode(array('logged_in'=>'false','error'=>'Missing credentials'));
 			exit();
 		endif;
 		if(!$this->ion_auth->login($post['user'], $post['pass'])):
-			http_response_code(403);
+			//http_response_code(403);
 			print json_encode(array('logged_in'=>'false','error'=>'Wrong credentials'));
 			exit();
 		endif;

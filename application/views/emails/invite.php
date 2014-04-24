@@ -2,7 +2,7 @@
 <html>
     <body style="background:#ccc;">
 
-        <div id="container" style="width:80%;height:auto;margin:30px auto; background:#fff;box-shadow:0px 0px 35px #1D1D1D;display:block;">
+        <div id="container" style="width:100%;height:auto; background:#fff;box-shadow:0px 0px 35px #1D1D1D;display:block;">
             <div id="header" style="background:#990000; color:#fff; padding:20px; font-size:18px;text-align:center; font-family:sans-serif;">
                 ZongList
             </div>
@@ -11,18 +11,18 @@
               <br /><br />
               <a href="<?php print base_url().'index.php/application/accept_invite/'.$id; ?>"><?php print base_url().'application/accept_invite/'.$id; ?></a>
             </div>
-            <div id="footer" style="background:#BCBCB2; color:#000;font-size:14px;font-family:sans-serif;padding:20px;">
+            <div id="footer" style="background:#BCBCB2; color:#000;font-size:14px;font-family:sans-serif;padding:20px;height:35px;">
                 <div style="width:49%; float:left !important; line-height:20px; font-size:13px;">
                     Copyright &copy; 2014. ZongList
                     <br />
                     All rights reserved.
+                    <br /><br /><br />
                 </div>
                 <div style="width:49%; float:right !important; text-align:right; line-height:20px; font-size:13px;">
                     For any problems regarding <a href="http://www.zonglist.com" style="color:#900; text-decoration:none;">ZongList</a> <br />
                     feel free to email us at <a href="mailto:support@zonglist.com" style="color:#900;text-decoration:none;">support@zonglist.com</a>.
+                    <br /><br /><br />
                 </div>
-                <!-- CLEAR BOTH -->
-                <div style="clear:both !important;"></div>
             </div>
         </div>
 
