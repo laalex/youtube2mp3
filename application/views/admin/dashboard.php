@@ -59,7 +59,7 @@
 			<h3 class="panel-title">Feedback count</h3>
 		</div>
 		<div class="panel-body">
-			Feedback received number: <h1><?php print $space_used; ?></h1>
+			Feedback received number: <h1><?php print $feedback; ?></h1>
 		</div>
 	</div>
 </div>

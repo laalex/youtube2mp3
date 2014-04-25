@@ -25,10 +25,17 @@ class admin_model extends CI_Model{
        }
 
        /**
+        * Feedback Count
+        */
+       public function fbk_count(){
+              return $this->db->count_all('feedback');
+       }
+
+       /**
         * Return downloads folder space used
         */
        public function download_space_used(){
-              return $this->dirsize('downloads');
+              return $this->dirsize('./downloads');
        }
 
        /**
@@ -58,7 +65,7 @@ class admin_model extends CI_Model{
                  $path = $dir."/".$file;
                  if (is_dir($path))
                  {
-                   $size += dirsize($path); // recursive in sub-folders
+                   $size += $this->dirsize($path); // recursive in sub-folders
                  }
                  elseif (is_file($path))
                  {
@@ -67,7 +74,7 @@ class admin_model extends CI_Model{
                }
              }
              @closedir($dh);
-             return $size/1024;
+             return round($size/(1024*1024),2);
            }
 
 }

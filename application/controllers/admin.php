@@ -16,6 +16,7 @@ class admin extends CI_Controller{
               $data['songs'] = $this->admin_model->song_data();
               $data['playlists'] = $this->admin_model->pls_count();
               $data['space_used'] = $this->admin_model->download_space_used();
+              $data['feedback'] = $this->admin_model->fbk_count();
               $this->load->view('admin/inc/header');
               $this->load->view('admin/inc/sidebar-menu');
               $this->load->view('admin/dashboard',$data);
