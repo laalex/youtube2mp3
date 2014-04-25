@@ -69,6 +69,8 @@
 	</script>
 	<!-- Angualr controllers -->
 	<script type="text/javascript" src="<?php assets_js();?>tipsy.js"></script>
+	<script type="text/javascript" src="<?php assets_js();?>mousewheel.js"></script>
+	<script type="text/javascript" src="<?php assets_js();?>customscrollbar.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>feedback.min.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>jSnippets.js"></script>

@@ -35,7 +35,13 @@ class admin_model extends CI_Model{
         * Return downloads folder space used
         */
        public function download_space_used(){
-              return $this->dirsize('./downloads');
+              $path = "/var/www/zonglist/downloads";
+              $io = popen('/usr/bin/du -ks '.$path, 'r');
+              $output = fgets ( $io, 4096);
+              $result = preg_split('/\s/', $output);
+              $size = $result[0]*1024;
+              pclose($io);
+              return round($size/(1024*1024*1024),2)+0.01;//Return the number in mb + 10 more.
        }
 
        /**
@@ -51,30 +57,18 @@ class admin_model extends CI_Model{
               return $feedback;
        }
 
-
-
-
-       private function dirsize($dir)
-           {
-             @$dh = opendir($dir);
-             $size = 0;
-             while ($file = @readdir($dh))
-             {
-               if ($file != "." and $file != "..")
-               {
-                 $path = $dir."/".$file;
-                 if (is_dir($path))
-                 {
-                   $size += $this->dirsize($path); // recursive in sub-folders
-                 }
-                 elseif (is_file($path))
-                 {
-                   $size += filesize($path); // add file
-                 }
-               }
-             }
-             @closedir($dh);
-             return round($size/(1024*1024),2);
-           }
+       function format_bytes($a_bytes) {
+        if ($a_bytes > 1024) {
+          return $a_bytes .' B';
+        } elseif ($a_bytes > 1048576) {
+          return round($a_bytes / 1024, 2) .' KB';
+        } elseif ($a_bytes > 1073741824) {
+          return round($a_bytes / 1048576, 2) . ' MB';
+        } elseif ($a_bytes > 1099511627776) {
+          return round($a_bytes / 1073741824, 2) . ' GB';
+        } elseif ($a_bytes > 1125899906842624) {
+          return round($a_bytes / 1099511627776, 2) .' TB';
+        }
+      }
 
 }

@@ -3,6 +3,7 @@
 <head>
 	<base href="<?php print base_url();?>dashboard/" />
 	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>scrollbars.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>feedback.min.css">

@@ -192,12 +192,12 @@ rplayer.repeat = function(bool){
 /**
  * Play an entire playlist
  */
-rplayer.play_playlist = function(pos){
+rplayer.play_playlist = function(pos,queue){
     if(pos !== undefined){
         rplayer.playlist_pos = pos;
     } else {rplayer.playlist_pos = 0;}
     //Check if playlist is already playing
-    if(rplayer.audio.paused == true)
+    if(rplayer.audio.paused == true || queue === undefined)
         rplayer.playSong(rplayer.playlist[rplayer.playlist_pos].direct_url,rplayer.playlist[rplayer.playlist_pos].nice_name);
 }
 

@@ -262,7 +262,7 @@ $(window).ready(function(){
 				data = $.parseJSON(data);
 				rplayer.playlist.push(data);
 				populatePlaylist(rplayer.playlist);
-				rplayer.play_playlist(rplayer.playlist_pos);
+				rplayer.play_playlist(rplayer.playlist_pos,true);
 			}
 		})
 	});
@@ -317,12 +317,13 @@ $(window).ready(function(){
 		$.each(array,function(){
 			rplayer.playlist.push(this);
 			//Update the playlist
-			if(i==0){var cls = "playlist-song playlist-active ttp"; var span="pause"; } else {var cls="ttp playlist-song"; var span="play";}
+			if(i==rplayer.playlist_pos){var cls = "playlist-song playlist-active ttp"; var span="pause"; } else {var cls="ttp playlist-song"; var span="play";}
 			playlist_data += '<div data-song-url="'+this.direct_url+'" data-playlist-pos="'+i+'" title="'+this.full_name+'" class="'+cls+'"><span class="glyphicon glyphicon-'+span+'"></span>&nbsp;'+this.nice_name+'<div data-playlist-pos="'+i+'" class="pull-right remove-song">X</div></div>';
 			i++;
 		});
 		//Append the playlist data t the playlist container
 		$("#rplayer_playlist").html(playlist_data);
+		$("#rplayer_playlist").mCustomScrollbar();
 	}
 
 });

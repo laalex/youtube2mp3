@@ -521,6 +521,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
   box-shadow: 0px 0px 15px #000;
   display: none;
   cursor: default !important;
+  overflow: hidden;
 }
 
 .playlist-song{
@@ -547,3 +548,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
   margin-right: -5px;
   background: #010101;
 }
+
+.mCSB_draggerContainer{margin-left: -5px;}

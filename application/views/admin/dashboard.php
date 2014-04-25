@@ -45,7 +45,7 @@
 				<h3 class="panel-title">Space usage</h3>
 			</div>
 			<div class="panel-body">
-				There are currently <b><?php print $space_used; ?></b> MB used by 'downloads' folder.
+				There are currently <b><?php print $space_used; ?></b>GB/<b>150GB</b> used by 'downloads' folder.
 			</div>
 		</div>
 		</div>
