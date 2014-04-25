@@ -6,11 +6,14 @@
 		<br />
 		<div id="player_controls">
 			<!--<span class="glyphicon glyphicon-backward"></span>&nbsp;&nbsp;-->
-			<span class="glyphicon glyphicon-play" id="play_button"></span>&nbsp;&nbsp;
+			<span title="Play/Pause" class="ttp glyphicon glyphicon-play" id="play_button"></span>&nbsp;&nbsp;
+			<span title="Toggle song repeat" class="ttp glyphicon glyphicon-repeat" id="repeat_button"></span>&nbsp;&nbsp;
 			<span class="label label-success" id="song_time">
 				<span class="label label-danger" id="song_time_elapsed"></span>
 			</span>&nbsp;&nbsp;
+			<span title="Show current playlist" class="ttp glyphicon glyphicon-align-justify" id="show_playlist"></span>
 			<!--<span class="glyphicon glyphicon-forward"></span>&nbsp;&nbsp;-->
+			<div id="rplayer_playlist"></div>
 		</div>
 		<div id="elapsed_time">
 			<div id="mp_elapsed">0:00</div>
@@ -65,6 +68,7 @@
 		YT_LOADED_SUCCESSFULLY = false;
 	</script>
 	<!-- Angualr controllers -->
+	<script type="text/javascript" src="<?php assets_js();?>tipsy.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>feedback.min.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>jSnippets.js"></script>

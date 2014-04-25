@@ -33,6 +33,18 @@ class application extends CI_Controller{
 		print json_encode($playlists);
 	}
 
+	//Playlits
+	public function playlist_songs($id){
+		$playlists = $this->application_model->get_playlist_songs($id);
+		print json_encode($playlists);
+	}
+
+	//Song
+	public function get_song($id){
+		$song = $this->application_model->get_song($id);
+		print json_encode($song);
+	}
+
 	//Set default playlist
 	public function set_default(){
 		$this->application_model->set_default_playlist();

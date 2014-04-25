@@ -29,10 +29,49 @@ class application_model extends CI_Model{
 		$return['playlist_songs'] = $this->db->from('songs')->where(array('user_id'=>$uid,'list_id'=>$id))->get()->result();
 		foreach($return['playlist_songs'] as &$s):
 			$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
-			$s->nice_name = str_replace('_',' ',$s->song_name);
+			$s->nice_name = str_replace('-'.$s->video_id,'',$s->song_name);
+			$s->nice_name = str_replace('_',' ',$s->nice_name);
 			$s->nice_name = str_replace('.mp3','',$s->nice_name);
 		endforeach;
 		return $return;
+	}
+
+	/**
+	 * Get playlist songs by playlist id
+	 */
+	public function get_playlist_songs($id){
+		$uid = $this->session->userdata('user_id');
+		$return = $this->db->from('songs')->where(array('user_id'=>$uid,'list_id'=>$id))->get()->result();
+		foreach($return as &$s):
+			$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
+			$s->nice_name = str_replace('-'.$s->video_id,'',$s->song_name);
+			$s->nice_name = str_replace('_',' ',$s->nice_name);
+			$s->nice_name = str_replace('.mp3','',$s->nice_name);
+			$s->full_name = $s->nice_name;
+			//Length is maximum 50
+			if(strlen($s->nice_name) > 50){
+				$s->nice_name = substr($s->nice_name,0,50) . '...';
+			}
+		endforeach;
+		return $return;
+	}
+
+	/**
+	 * Get playlist songs by playlist id
+	 */
+	public function get_song($id){
+		$uid = $this->session->userdata('user_id');
+		$s = $this->db->from('songs')->where(array('user_id'=>$uid,'song_id'=>$id))->get()->first_row();
+		$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
+		$s->nice_name = str_replace('-'.$s->video_id,'',$s->song_name);
+		$s->nice_name = str_replace('_',' ',$s->nice_name);
+		$s->nice_name = str_replace('.mp3','',$s->nice_name);
+		$s->full_name = $s->nice_name;
+		//Length is maximum 50
+		if(strlen($s->nice_name) > 50){
+			$s->nice_name = substr($s->nice_name,0,50) . '...';
+		}
+		return $s;
 	}
 
 	/* Set default playlist for current user */

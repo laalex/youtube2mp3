@@ -222,6 +222,109 @@ $(window).ready(function(){
 		start_song_download("https://www.youtube.com/watch?v="+id,"#video-download-response");
 	});
 
+	/**
+	 * Queue an entire playlist
+	 */
+	$(document).on('click',"#queue_playlist",function(){
+		var playlist_id = $(this).data('list-id');
+		//Queue the list into the player
+		$.ajax({
+			url:baseurl+'application/playlist_songs/'+playlist_id,
+			type:'POST',
+			success:function(data){
+				data = $.parseJSON(data);
+				//Add each object to the rplayer.playlist;
+				populatePlaylist(data);
+				//Start playlist play
+				rplayer.play_playlist();
+			}
+		});
+	});
+	/**
+	 * Remove playlist song
+	 */
+	$(document).on('click','.remove-song',function(){
+		var pos = $(this).data('playlist-pos');
+		rplayer.playlist.splice(pos,1);
+		populatePlaylist(rplayer.playlist);
+		$('.tipsy').hide();
+		return false;
+	});
+	/**
+	 * Queue a new song
+	 */
+	$(document).on('click','.song-queue-action',function(){
+		var song_id = $(this).data('song-id');
+		$.ajax({
+			url:baseurl+'application/get_song/'+song_id,
+			type:'POST',
+			success:function(data){
+				data = $.parseJSON(data);
+				rplayer.playlist.push(data);
+				populatePlaylist(rplayer.playlist);
+				rplayer.play_playlist(rplayer.playlist_pos);
+			}
+		})
+	});
+	/**
+	 * On song click. From playlist. Play the song and update everything
+	 */
+	$(document).on('click','.playlist-song',function(){
+		//Get the current active song
+		var cactive = $('.playlist-active').children().removeClass('glyphicon-pause').addClass('glyphicon-play');
+		//Remove the active
+		$('.playlist-song').removeClass('playlist-active');
+		$(this).addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
+		//Get the current playlist entry id
+		var pos = $(this).data('playlist-pos');
+		rplayer.play_playlist(pos);
+	});
+	/**
+	 * Show MP3 player playlist
+	 */
+	$(document).on('click',"#show_playlist",function(){
+		$("#rplayer_playlist").slideToggle();
+	});
+
+	/**
+	 * Toggle player repeat
+	 */
+	$(document).on('click',"#repeat_button",function(){
+		var repeat = rplayer.repeat();
+		if(repeat == false){
+			//Set repeat to true. Change color
+			rplayer.repeat(true);
+			$(this).attr('style','color:#09f');
+		} else {
+			rplayer.repeat(false);
+			$(this).attr('style','color:#fff');
+		}
+	});
+
+	/**
+	 * Share playlist with other users
+	 */
+	$(document).on('click',"#share_playlist",function(){
+		$("#share-link-content").html('<input type="text" value="'+window.document.location+'" class="form-control"/>');
+		$('.modal').modal();
+	});
+
+	/** Function that populates the playlist */
+	function populatePlaylist(array){
+		rplayer.playlist = [];//Reset the playlist
+		var playlist_data = "";
+		var i = 0;
+		$.each(array,function(){
+			rplayer.playlist.push(this);
+			//Update the playlist
+			if(i==0){var cls = "playlist-song playlist-active ttp"; var span="pause"; } else {var cls="ttp playlist-song"; var span="play";}
+			playlist_data += '<div data-song-url="'+this.direct_url+'" data-playlist-pos="'+i+'" title="'+this.full_name+'" class="'+cls+'"><span class="glyphicon glyphicon-'+span+'"></span>&nbsp;'+this.nice_name+'<div data-playlist-pos="'+i+'" class="pull-right remove-song">X</div></div>';
+			i++;
+		});
+		//Append the playlist data t the playlist container
+		$("#rplayer_playlist").html(playlist_data);
+	}
+
 });
 
 	/* ANGULAR JS APPLICATION */
@@ -372,8 +475,11 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
 }
 
 
+/**
+ * Window load functions
+ */
+
 $(window).load(function(){
-console.log(first_visit);
 if(first_visit=='true'){
 	/**
 	 * Tutorial
@@ -382,4 +488,11 @@ if(first_visit=='true'){
 		autoStart : true
 	});
 }
+
+	/**
+	 * Other scripts
+	 */
+	/** Tipsy */
+	$('.ttp').tipsy({live: true,gravity:'s'});
+
 });

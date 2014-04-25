@@ -14,7 +14,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a class="pointer" id="toggle_mp3"><span class="glyphicon glyphicon-headphones"></span>&nbsp;Toggle Player</a>
             <li><a id="toggle-downloads" data-visible="ok"><span class="glyphicon glyphicon-resize-small"></span>&nbsp;Hide downloads</a></li>
-            <li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
+            <!--<li><a href="<?php print base_url();?>dashboard/#/"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>-->
             <!--<li><a href="<?php print base_url();?>dashboard/#/settings"><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a></li>-->
           </ul>
         </div>

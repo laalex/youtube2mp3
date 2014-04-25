@@ -43,6 +43,15 @@ rplayer.init = function(cursor_holder,cursor_div,counter_div,duration_div,play_b
     rplayer.audio = audio_element;
     //Init volume control
     rplayer.volume();
+    //Init playlist
+    rplayer.playlist = [];
+    rplayer.playlist_pos = 0;
+    /**
+     * Event Listeners
+     */
+    rplayer.audio.addEventListener('pause',function(event){
+        pauseEventHandler(event);
+    });
     return rplayer.audio;
 }
 
@@ -174,9 +183,22 @@ rplayer.jumpTo = function(secs){
 
 rplayer.repeat = function(bool){
     if(rplayer.audio !== undefined){
-        rplayer.audio.loop = bool;
+        if(bool !==undefined)
+            rplayer.audio.loop = bool;
     }
-    return false;
+    return rplayer.audio.loop;
+}
+
+/**
+ * Play an entire playlist
+ */
+rplayer.play_playlist = function(pos){
+    if(pos !== undefined){
+        rplayer.playlist_pos = pos;
+    } else {rplayer.playlist_pos = 0;}
+    //Check if playlist is already playing
+    if(rplayer.audio.paused == true)
+        rplayer.playSong(rplayer.playlist[rplayer.playlist_pos].direct_url,rplayer.playlist[rplayer.playlist_pos].nice_name);
 }
 
 //Play song function
@@ -193,6 +215,35 @@ rplayer.playSong = function(song_url,song_name,seconds){
         setTimeout(function(){
             rplayer.jumpTo(seconds);
         },500);
+    }
+}
+
+/**
+ * Event listeners
+ */
+
+function pauseEventHandler(evt){
+    /** Check playlist length */
+    if(rplayer.playlist.length > 0){
+        //Check if player state is at the end
+        if(rplayer.audio.currentTime === rplayer.audio.duration){
+            //Update rplayer.playlist_pos
+            $('.playlist-song').removeClass('playlist-active');
+            var cactive = $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').children().removeClass('glyphicon-pause').addClass('glyphicon-play');
+            if(rplayer.playlist_pos+1 < rplayer.playlist.length){
+                rplayer.playlist_pos++;
+                rplayer.play_playlist(rplayer.playlist_pos);
+                $("#watchdog").html("<b>Now playing: </b>"+rplayer.playlist[rplayer.playlist_pos].nice_name);
+                $("#watchdog").fadeIn().delay(3000).fadeOut();
+            }
+            if(rplayer.playlist_pos+1 > rplayer.playlist.length){rplayer.pause();}
+            /** Update playlist */
+            $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
+        }
+    }
+    var el = document.getElementById(rplayer.config.play_button_div);
+    if(rplayer.audio.paused){
+        el.setAttribute('class','glyphicon glyphicon-play');
     }
 }
 
