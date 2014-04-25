@@ -4,11 +4,14 @@ class application extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-		//Check if user is logged in
-		if(!$this->ion_auth->logged_in()):
+        //Check if user is logged in
+        $segment = $this->uri->segment(2,false);
+        if($segment != "accept_invite" || $segment === false):
+          if(!$this->ion_auth->logged_in()):
 			//The user is logged in -> Redirect to the application
 			redirect(base_url().'login');
-		endif;
+		  endif;
+        endif;
 		$this->load->model('application_model');
 		//Get first visit
 		$this->session->set_userdata('first_visit',$this->application_model->set_first_visit());

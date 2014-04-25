@@ -59,7 +59,8 @@ $route['settings/put_invite'] = 'application/put_invitation';
 /* More app routes */
 $route['application/accept_invite/(:any)'] = 'application/accept_invite';
 /** Website */
-$route['terms-of-service'] = 'tos';
+$route['terms-of-service'] = 'tos/index';
+
 
 
 
