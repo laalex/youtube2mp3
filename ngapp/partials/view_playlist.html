@@ -1,7 +1,5 @@
-	<span class="pull-right">
-		<span class="label label-danger">{{GetSongCount()}} song(s)</span>
-	</span>
-	<br />
+          <br />
+          <div class="row" style="padding:0 !important;margin:0 !important;">
 	<div ng-if="GetSongCount() > 0" id="download_playlist" class="pull-left">
 		<a href="/dashboard/#/" class="" id="create-pack-download" data-playlist="{{playlist.list_id}}">
 			<span class="label label-success label-download-playlist ttp" title="Click to download an archive containing all the songs"><span class="glyphicon glyphicon-download"></span>&nbsp;DOWNLOAD "{{playlist.name}}"</span>
@@ -13,6 +11,8 @@
 			<span class="glyphicon glyphicon-time"></span>&nbsp;Please wait while we are creating your download pack..
 		</div>
 	</div>
+          <span class="pull-right label-download-playlist label label-danger">{{GetSongCount()}} tracks</span>
+          </div>
 
 
 	<div class="clearfix"></div>

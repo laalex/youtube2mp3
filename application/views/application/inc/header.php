@@ -3,6 +3,7 @@
 <head>
 	<base href="<?php print base_url();?>dashboard/" />
 	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>scrollbars.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php assets_css();?>bootstrap-theme.min.css">
@@ -18,3 +19,10 @@
 	<script type="text/javascript" src="<?php assets_js();?>angularjs/angular-route.js"></script>
 </head>
 <body>
+<!-- APP LOAD -->
+<div id="app_loading">
+	<div id="app_loading_logo">
+		<img src="<?php print base_url();?>assets/img/logo.png"><br />
+		Loading application...
+	</div>
+</div>

@@ -5,8 +5,6 @@
 /**
  * Objects init
  */
-//Init the MP3 player
-rplayer.init("song_time","song_time_elapsed","mp_elapsed","mp_total","play_button","mp3_songname","volume_selected","volume_cursor");
 //Init jSnippets
 jsnippets.init('/assets/snippets.html');
 
@@ -18,7 +16,8 @@ function dispatchFeedback(){
  * Click events and AJAX calls
  */
 $(window).ready(function(){
-
+	//Init the MP3 player
+	rplayer.init("song_time","mp_elapsed","mp_total","play_button","mp3_songname","volume_cursor");
 	/**
 	 * Feedbakc plugin
 	 */
@@ -483,19 +482,20 @@ function ydlprogress(videourl,progressbar,downloadbutton,actiontag,file,plupdate
  */
 
 $(window).load(function(){
-if(first_visit=='true'){
-	/**
-	 * Tutorial
-	 */
-	$("#tutorial_id").joyride({
-		autoStart : true
-	});
-}
-
+	if(first_visit=='true'){
+		/**
+		 * Tutorial
+		 */
+		$("#tutorial_id").joyride({
+			autoStart : true
+		});
+	}
 	/**
 	 * Other scripts
 	 */
 	/** Tipsy */
 	$('.ttp').tipsy({live: true,gravity:'s'});
 
+	//Finished loading
+	$("#app_loading").fadeOut();
 });

@@ -25,16 +25,14 @@ window.rplayer.config = {
 /**
  * Init the rplayer object with the id of the <audio> element
  */
-rplayer.init = function(cursor_holder,cursor_div,counter_div,duration_div,play_button_div,song_title_div,volume_selected_div,volume_cursor_div){
+rplayer.init = function(cursor_holder,counter_div,duration_div,play_button_div,song_title_div,volume_selected_div){
     //Init rplayer config
     rplayer.config.cursor_holder=cursor_holder;
-    rplayer.config.cursor_div=cursor_div;
     rplayer.config.duration_div=duration_div;
     rplayer.config.counter_div=counter_div;
     rplayer.config.play_button_div=play_button_div;
     rplayer.config.song_title_div=song_title_div;
     rplayer.config.volume_selected_div=volume_selected_div;
-    rplayer.config.volume_cursor_div=volume_cursor_div;
     /** Create unique hash - used as ID for the mp3 player */
     rplayer.id = new Date().getTime()+'_rplayer';
     var audio_element = document.createElement("audio");
@@ -46,6 +44,19 @@ rplayer.init = function(cursor_holder,cursor_div,counter_div,duration_div,play_b
     //Init playlist
     rplayer.playlist = [];
     rplayer.playlist_pos = 0;
+    //Init the sliders and the required listeners for them
+    $("#"+rplayer.config.cursor_holder).slider({"min":0,"max":100,"step":1,
+        slide:function(e,u){
+            var v = $(this).slider("value");
+            rplayer.seekto(v);
+        }
+    });
+    $("#"+rplayer.config.volume_selected_div).slider({"min":0,"max":1,"step":0.01,
+        change:function(e,u){
+            var v = $(this).slider("value");
+            rplayer.volume(v);
+        }
+    });
     /**
      * Event Listeners
      */
@@ -78,13 +89,10 @@ rplayer.volume = function(val){
         var el = document.getElementById(rplayer.config.volume_selected_div);
         if(val !== undefined){
             //Set the volume cursor
-            el.setAttribute('style','width:'+val+'%');
-            //Set the volume
-            val = val/100;
             rplayer.audio.volume = val;
         } else {
             var val = rplayer.audio.volume;
-            el.setAttribute('style','width:'+(val*100)+'%');
+            $("#"+rplayer.config.volume_selected_div).slider({"value":val});
             return val;
         }
         return true;
@@ -151,20 +159,10 @@ rplayer.seek_bwd = function(){
 
 }
 
-rplayer.set_playlist = function(){
-
-}
-
-rplayer.get_playlist = function(){
-
-}
-
-
 rplayer.seekto = function(percent){
     if(rplayer.audio !== undefined){
         var max = rplayer.duration();
         var ct = (percent/100)*max;
-        console.log(ct);
         rplayer.audio.currentTime = ct;
         return true
     }else {
@@ -239,6 +237,8 @@ function pauseEventHandler(evt){
             if(rplayer.playlist_pos+1 > rplayer.playlist.length){rplayer.pause();}
             /** Update playlist */
             $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
+            //Remove glyphicon-play and glyphicon-pause from "remvoe song"
+            $('.remove-song').removeClass("glyphicon-pause").removeClass("glyphicon-play");
         }
     }
     var el = document.getElementById(rplayer.config.play_button_div);
@@ -255,12 +255,11 @@ function pauseEventHandler(evt){
 rplayer.cursor = function(cursor_div,counter_div,duration_div){
     if(rplayer.audio !== undefined){
         rplayer.audio.addEventListener('timeupdate',function(evt){
-            /** When timeupdate is triggered, update the two divs */
-            var cd = document.getElementById(cursor_div);
+            /** When timeupdate is triggered, update the time counter and the slider */
             var ct = document.getElementById(counter_div);
             //Make updates calculations and transform seconds into hh:mm:ss
             ct.innerHTML = rplayer.formatElapsedTime(rplayer.played());
-            cd.setAttribute("style","width:"+rplayer.formatElapsedPercent(rplayer.played(),rplayer.duration())+"%");
+            $("#song_time").slider("option","value",rplayer.formatElapsedPercent(rplayer.played(),rplayer.duration()));
             rplayer.duration(duration_div);
         });
     }

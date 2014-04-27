@@ -7,9 +7,8 @@
 		<div id="player_controls">
 			<!--<span class="glyphicon glyphicon-backward"></span>&nbsp;&nbsp;-->
 			<span title="Play/Pause" class="ttp glyphicon glyphicon-play" id="play_button"></span>&nbsp;&nbsp;
-			<span title="Toggle song repeat" class="ttp glyphicon glyphicon-repeat" id="repeat_button"></span>&nbsp;&nbsp;
+			<span title="Toggle song repeat" class="ttp glyphicon glyphicon-repeat" id="repeat_button"></span>&nbsp;&nbsp;&nbsp;&nbsp;
 			<span class="label label-success" id="song_time">
-				<span class="label label-danger" id="song_time_elapsed"></span>
 			</span>&nbsp;&nbsp;
 			<span title="Show current playlist" class="ttp glyphicon glyphicon-align-justify" id="show_playlist"></span>
 			<!--<span class="glyphicon glyphicon-forward"></span>&nbsp;&nbsp;-->
@@ -23,9 +22,7 @@
 			<span class="glyphicon glyphicon-volume-down pull-left" style="display:block;">&nbsp;</span>
 			<span class="glyphicon glyphicon-volume-down pull-right" style="display:block;">&nbsp;</span>
 			<br />
-			<span class="label label-success" id="volume_cursor">
-				<span class="label label-danger" id="volume_selected"></span>
-			</span>
+			<span class="label label-success" id="volume_cursor"></span>
 		</div>
 	</div>
 
@@ -59,7 +56,6 @@
 	  	<br /><br />
 	  </li>
 	</ol>
-
 	<!-- SCRIPTS -->
 	<script type="text/javascript">
 		var baseurl = "<?php print base_url(); ?>index.php/";
@@ -69,6 +65,7 @@
 	</script>
 	<!-- Angualr controllers -->
 	<script type="text/javascript" src="<?php assets_js();?>tipsy.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>mousewheel.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>customscrollbar.js"></script>
 	<script type="text/javascript" src="<?php assets_js();?>feedback.min.js"></script>
