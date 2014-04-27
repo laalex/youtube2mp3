@@ -30,7 +30,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
-  background: url(../assets/img/app_bg.png) repeat;
+  background: url(/assets/img/app_bg.png) repeat;
 }
 
 
@@ -323,17 +323,19 @@ a:hover{text-decoration: none;}
 .song-download-action {cursor:pointer;}
 
 #watchdog{
-  position: fixed;
-  bottom: 50px;
-  right: 10px;
-  /* left: 240px; */
-  z-index: 10000;
-  background: #1d1d1d;
-  color: #fff;
-  font-size: 12px;
-  border: 1px solid #000;
   opacity: .7;
   text-align: center;
+  background: #101010;
+  border: none;
+  font-family: 'Lato', 'sans-serif';
+  font-size: 13px;
+  text-shadow: 1px 1px #000;
+  position: fixed;
+  bottom: 40px;
+  left: 0px;
+  right: 0px;
+  border-radius: 0;
+  color:#fff !important;
 }
 
 .no-radius{border-radius:0 !important;}
@@ -601,4 +603,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
   position: absolute;
   top:50%;left:50%;
   margin-left:-100px;margin-top:-100px;
+}
+
+.playlist-name{
+  font-family: 'Lato', 'sans-serif';
+  font-size:13px;
+  color:#101010;
+  font-weight: normal;
+  cursor: pointer;
 }

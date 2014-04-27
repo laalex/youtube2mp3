@@ -7,7 +7,7 @@
 		<div id="player_controls">
 			<!--<span class="glyphicon glyphicon-backward"></span>&nbsp;&nbsp;-->
 			<span title="Play/Pause" class="ttp glyphicon glyphicon-play" id="play_button"></span>&nbsp;&nbsp;
-			<span title="Toggle song repeat" class="ttp glyphicon glyphicon-repeat" id="repeat_button"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span title="Toggle playlist repeat" class="ttp glyphicon glyphicon-repeat" id="repeat_button"></span>&nbsp;&nbsp;&nbsp;&nbsp;
 			<span class="label label-success" id="song_time">
 			</span>&nbsp;&nbsp;
 			<span title="Show current playlist" class="ttp glyphicon glyphicon-align-justify" id="show_playlist"></span>
@@ -19,8 +19,8 @@
 			<div id="mp_total">/ 0:00</div>
 		</div>
 		<div id="volume_control">
-			<span class="glyphicon glyphicon-volume-down pull-left" style="display:block;">&nbsp;</span>
-			<span class="glyphicon glyphicon-volume-down pull-right" style="display:block;">&nbsp;</span>
+			<span class="glyphicon glyphicon-volume-off pull-left" id="rplayer-mute" style="display:block;">&nbsp;</span>
+			<span class="glyphicon glyphicon-volume-up pull-right" id="rplayer-fullsound" style="display:block;">&nbsp;</span>
 			<br />
 			<span class="label label-success" id="volume_cursor"></span>
 		</div>

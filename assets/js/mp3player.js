@@ -44,15 +44,16 @@ rplayer.init = function(cursor_holder,counter_div,duration_div,play_button_div,s
     //Init playlist
     rplayer.playlist = [];
     rplayer.playlist_pos = 0;
+    rplayer.playlist_repeat = 0;
     //Init the sliders and the required listeners for them
-    $("#"+rplayer.config.cursor_holder).slider({"min":0,"max":100,"step":1,
+    $("#"+rplayer.config.cursor_holder).slider({"min":0,"max":100,"step":0.5,
         slide:function(e,u){
             var v = $(this).slider("value");
             rplayer.seekto(v);
         }
     });
     $("#"+rplayer.config.volume_selected_div).slider({"min":0,"max":1,"step":0.01,
-        change:function(e,u){
+        slide:function(e,u){
             var v = $(this).slider("value");
             rplayer.volume(v);
         }
@@ -81,14 +82,34 @@ rplayer.load = function(song_url){
 }
 
 /**
+ * Mute audio -> Set volume to 0
+ */
+rplayer.mute = function(){
+    if(rplayer.audio !== undefined){
+        $("#"+rplayer.config.volume_selected_div).slider({"value":0});
+        rplayer.volume(0);
+    }
+}
+
+/**
+ * Set volume to max
+ */
+rplayer.maxvol = function(){
+    if(rplayer.audio !== undefined){
+        $("#"+rplayer.config.volume_selected_div).slider({"value":1});
+        rplayer.volume(1);
+    }
+}
+
+/**
  * [setVolume] - Set the volume for the mp3 player
  * @param {[float]} val [range between 0 and 100]
  */
 rplayer.volume = function(val){
     if(rplayer.audio !== undefined){
-        var el = document.getElementById(rplayer.config.volume_selected_div);
         if(val !== undefined){
             //Set the volume cursor
+            $("#"+rplayer.config.volume_selected_div).slider({"value":val});
             rplayer.audio.volume = val;
         } else {
             var val = rplayer.audio.volume;
@@ -149,15 +170,6 @@ rplayer.played = function(){
     return false;
 }
 
-
-/** To do */
-rplayer.seek_fwd = function(){
-
-}
-
-rplayer.seek_bwd = function(){
-
-}
 
 rplayer.seekto = function(percent){
     if(rplayer.audio !== undefined){
@@ -233,12 +245,29 @@ function pauseEventHandler(evt){
                 rplayer.play_playlist(rplayer.playlist_pos);
                 $("#watchdog").html("<b>Now playing: </b>"+rplayer.playlist[rplayer.playlist_pos].nice_name);
                 $("#watchdog").fadeIn().delay(3000).fadeOut();
+                /** Update playlist */
+                $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
+                //Remove glyphicon-play and glyphicon-pause from "remvoe song"
+                $('.remove-song').removeClass("glyphicon-pause").removeClass("glyphicon-play");
+                return;
             }
-            if(rplayer.playlist_pos+1 > rplayer.playlist.length){rplayer.pause();}
-            /** Update playlist */
-            $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
-            //Remove glyphicon-play and glyphicon-pause from "remvoe song"
-            $('.remove-song').removeClass("glyphicon-pause").removeClass("glyphicon-play");
+            if(rplayer.playlist_pos+1 >= rplayer.playlist.length){
+                //Check if playlist repeat is set
+                if(rplayer.playlist_repeat == 1){
+                    rplayer.playlist_pos = 0;
+                    rplayer.play_playlist(rplayer.playlist_pos);
+                    $("#watchdog").html("<b>Now playing: </b>"+rplayer.playlist[rplayer.playlist_pos].nice_name);
+                    $("#watchdog").fadeIn().delay(3000).fadeOut();
+                    /** Update playlist */
+                    $('[data-playlist-pos="'+rplayer.playlist_pos+'"]').addClass('playlist-active').children().removeClass('glyphicon-play').addClass('glyphicon-pause');
+                    //Remove glyphicon-play and glyphicon-pause from "remvoe song"
+                    $('.remove-song').removeClass("glyphicon-pause").removeClass("glyphicon-play");
+                } else {
+                    $("#watchdog").html("<b>Playlist finished playing.</b> Select a song to play or queue a playlist.").fadeIn().delay(3000).fadeOut();
+                    rplayer.pause();
+                }
+                return;
+            }
         }
     }
     var el = document.getElementById(rplayer.config.play_button_div);
@@ -330,18 +359,21 @@ rplayer.togglePlayPause = function(){
     }
 }
 
-/** Different click events used by the player */
-$(window).load(function(){
-    /** Update volume by clicking on the cursor */
-    $(document).on('click','#'+rplayer.config.volume_selected_div+",#"+rplayer.config.volume_cursor_div,function(e){
-        var x = e.pageX - this.offsetLeft;
-        var percent = Math.ceil((x/150)*100);
-        rplayer.volume(percent);
+/**
+ * Populate the playlis into a div
+ */
+rplayer.populatePlaylist = function(array){
+    rplayer.playlist = [];//Reset the playlist
+    var playlist_data = "";
+    var i = 0;
+    $.each(array,function(){
+        rplayer.playlist.push(this);
+        //Update the playlist
+        if(i==rplayer.playlist_pos){var cls = "playlist-song playlist-active ttp"; var span="pause"; } else {var cls="ttp playlist-song"; var span="play";}
+        playlist_data += '<div data-song-url="'+this.direct_url+'" data-playlist-pos="'+i+'" title="'+this.full_name+'" class="'+cls+'"><span class="glyphicon glyphicon-'+span+'"></span>&nbsp;'+this.nice_name+'<div data-playlist-pos="'+i+'" class="pull-right remove-song">X</div></div>';
+        i++;
     });
-    /** Update track play position by clicking on the cursor */
-    $(document).on('click','#'+rplayer.config.cursor_holder+",#"+rplayer.config.cursor_div,function(e){
-        var x = e.pageX - this.offsetLeft;
-        var percent = Math.ceil((x/300)*100);
-        rplayer.seekto(percent);
-    });
-});
+    //Append the playlist data t the playlist container
+    $("#rplayer_playlist").html(playlist_data);
+    $("#rplayer_playlist").mCustomScrollbar();
+}

@@ -28,8 +28,17 @@
 					{{song.nice_name}}
 					<br />
 					<span class="song-details">
-						<a href="http://www.youtube.com/watch?v={{song.video_id}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> watch on YouTube</a>
+						<a class="yt-watch-action" href="http://www.youtube.com/watch?v={{song.video_id}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> watch on YouTube</a>
 					</span>
+                                   &nbsp;&nbsp;&nbsp;
+                                   <div class="btn-group">
+                                     <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                                       Move to playlist <span class="caret"></span>
+                                     </button>
+                                     <ul class="dropdown-menu" role="menu">
+                                       <li ng-repeat="playlist in playlists"><a class="move-to-playlist" data-song-id="{{song.song_id}}" data-new-list-id="{{playlist.list_id}}" href="/dashboard/#/view/{{playlist.list_id}}">{{playlist.name}}</a></li>
+                                     </ul>
+                                   </div>
 				</td>
 				<td>
 					<span ng-if="song.is_downloaded == 0" title="The song will be downloaded again when you request it." class="ttp expired-{{song.song_id}}"><span class="glyphicon glyphicon-info-sign"></span></span>
@@ -78,7 +87,7 @@
       </div>
       <div class="modal-body">
       		<br />
-      		<span id="share-link-content"></span>
+      		<span id="share-link-content" data-list-id="{{playlist.list_id}}"><input type="text" value="" class="form-control"/></span>
       		<br /><br />
       		<p><b>Attention:</b> The user needs to be logged in order to see this playlist! Also, user can only view, listen and download songs within this playlist. He cannot add any other songs.</p>
       </div>

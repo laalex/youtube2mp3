@@ -50,6 +50,7 @@ $route['dashboard'] = 'application';
 $route['settings'] = 'application/settings';
 $route['playlists/getPlaylists'] = 'application/playlists';
 $route['playlists/get/(:num)'] = 'application/view_playlist';
+$route['playlists/get_shared/(:num)'] = 'application/view_playlist_shared';
 $route['playlists/set_default/(:num)'] = 'application/set_default';
 $route['playlists/remove/(:num)'] = 'application/remove_playlist';
 $route['invitations/getInvitations'] = 'application/get_invitations';

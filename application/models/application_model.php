@@ -36,6 +36,22 @@ class application_model extends CI_Model{
 		return $return;
 	}
 
+	/* Return requested playlist to be shared */
+	public function get_playlist_shared(){
+		//Get the user ID
+		$id = $this->uri->segment(3);
+		$return['playlist_data'] = $this->db->from('playlists')->where(array('list_id'=>$id))->get()->first_row();
+		/* Get all songs in the current list */
+		$return['playlist_songs'] = $this->db->from('songs')->where(array('list_id'=>$id))->get()->result();
+		foreach($return['playlist_songs'] as &$s):
+			$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
+			$s->nice_name = str_replace('-'.$s->video_id,'',$s->song_name);
+			$s->nice_name = str_replace('_',' ',$s->nice_name);
+			$s->nice_name = str_replace('.mp3','',$s->nice_name);
+		endforeach;
+		return $return;
+	}
+
 	/**
 	 * Get playlist songs by playlist id
 	 */
@@ -108,7 +124,10 @@ class application_model extends CI_Model{
 		$uid = $this->session->userdata('user_id');
 		$invitations = $this->db->where('user_id',$uid)->get('invitations')->result();
 		foreach($invitations as &$i):
-			if($i->accepted) $i->accepted = 'Yes'; else $i->accepted = 'No';
+			if($this->db->where('username',$i->email)->count_all_results('users'))
+				$i->accepted = "Yes";
+			else
+				$i->accepted = "Not yet";
 		endforeach;
 		return $invitations;
 	}
@@ -242,5 +261,17 @@ class application_model extends CI_Model{
 			return 'false';
 		}
 		exit();
+	}
+
+	/**
+	 * Update the playlist of a song
+	 */
+	public function change_song_playlist(){
+		$post = $this->input->post();
+		if(!empty($post)):
+			//Update the list ID
+			$this->db->where('song_id',$post['sid'])->update('songs',array('list_id'=>$post['plid']));
+			print 'success';
+		endif;
 	}
 }

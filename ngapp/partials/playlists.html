@@ -1,32 +1,39 @@
-	<a href="/#/playlists" id="add-new-playlist" class="label label-success"><span class="glyphicon glyphicon-ok"></span> &nbsp; Click here to create a playlist</a>
+	<a href="/#/playlists" id="add-new-playlist" class="label label-success label-download-playlist"><span class="glyphicon glyphicon-ok"></span> &nbsp; Click here to create a playlist</a>
 	<!-- Playlist modal -->
 	<div class="closed" id="add-new-playlist-form">
 	<br />
 		<form id="new-playlist-form" ng-submit="addPlaylist()">
 	      	<input type="text" ng-model="name" placeholder="Playlist name" class="form-control">
 	      	<br />
-	      	<input type="submit" value="Create playlist" class="btn label-success label-submit">
+	      	<input type="submit" value="Create playlist" class="btn label-success label-submit label-download-playlist">
 	    </form>
 	</div>
 	<hr />
+	<div class="alert alert-info"><span class="glyphicon glyphicon-heart"></span>&nbsp; is your default playlist where songs will be downloaded</div>
 	<table class="table table-striped">
 		<thead>
-			<th>Playlist name</th><th colspan="3">Actions</th>
+			<th>Playlist name</th><th colspan="3">&nbsp;</th>
 		</thead>
 
 			<tr ng-repeat="playlist in playlists">
 
 				<td width="80%">
-					<h4 class="label label-success">{{playlist.name}}</h4>&nbsp;<label class="label label-default" ng-if="playlist.default == 1">Default playlist</label>
+					<a href="/dashboard/#/view/{{playlist.list_id}}">
+					<h4 class="label playlist-name">
+						<label class="label playlist-name">
+						<span ng-if="playlist.default == 0" class="glyphicon glyphicon-list"></span>
+						<span ng-if="playlist.default == 1" class="glyphicon glyphicon-heart"></span>
+						&nbsp;{{playlist.name}}</h4>&nbsp;</label>
+					</a>
 				</td>
 				<td>
-					<a href="/dashboard/#/view/{{playlist.list_id}}" class="label label-success btn-xs" >View playlist</a>
+					<a href="/dashboard/#/view/{{playlist.list_id}}" class="label ttp label-download-playlist label-success btn-xs" >&nbsp;<span class="glyphicon glyphicon-eye-open"></span>&nbsp;</a>
 				</td>
 				<td>
-					<a href="/dashboard/#/playlists" data-pid="{{playlist.list_id}}" class="label label-warning btn-xs confirm" >Remove</a>
+					<a href="/dashboard/#/playlists" data-pid="{{playlist.list_id}}" class="label ttp label-download-playlist  label-danger btn-xs confirm" >&nbsp;<span class="glyphicon glyphicon-remove"></span>&nbsp;</a>
 				</td>
 				<td>
-					<a href="/dashboard/#/playlists" data-id="{{playlist.list_id}}" ng-click="makeDefault()"  class="label label-default btn-xs">Make default</a>
+					<a href="/dashboard/#/playlists" data-id="{{playlist.list_id}}" ng-click="makeDefault()"  class="label ttp label-download-playlist label-default btn-xs">&nbsp;<span class="glyphicon glyphicon-heart"></span>&nbsp;</a>
 				</td>
 
 			</tr>

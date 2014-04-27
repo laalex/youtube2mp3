@@ -61,6 +61,12 @@ class application extends CI_Controller{
 		print json_encode($data);
 	}
 
+	//View shared playlsit
+	public function view_playlist_shared(){
+		$data = $this->application_model->get_playlist_shared();
+		print json_encode($data);
+	}
+
 	//Get invitations
 	public function get_invitations(){
 		$data = $this->application_model->get_invitations();
@@ -80,6 +86,11 @@ class application extends CI_Controller{
 	/** Change password */
 	public function change_password(){
 		$this->application_model->change_password();
+	}
+
+	/** Change song playlist */
+	public function change_song_playlist(){
+		$this->application_model->change_song_playlist();
 	}
 
 }

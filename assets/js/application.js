@@ -153,6 +153,7 @@ $(window).ready(function(){
 	/** Send friend invitation */
 	$(document).on('submit','#user-invite-form',function(){
 		var email = $("#invite-email").val();
+		$("#watchdog").html("Please wait while sending your invite..").fadeIn();
 		$.ajax({
 			type:'POST',
 			url:baseurl+'settings/put_invite',
@@ -292,21 +293,35 @@ $(window).ready(function(){
 	 */
 	$(document).on('click',"#repeat_button",function(){
 		var repeat = rplayer.repeat();
-		if(repeat == false){
-			//Set repeat to true. Change color
-			rplayer.repeat(true);
-			$(this).attr('style','color:#09f');
-		} else {
+		var repeat_playlist = rplayer.playlist_repeat;
+		if(repeat_playlist == 0 && repeat == false){
+			//Toggle playlist repeat
 			rplayer.repeat(false);
-			$(this).attr('style','color:#fff');
+			rplayer.playlist_repeat = 1;
+			$(this).attr('style','color:#09f').attr('title',"Toggle one repeat");
+			$('.ttp').tipsy({live: true,gravity:'s'});
+		} else if(repeat_playlist  == 1 && repeat == false){
+			//Toggle one repeat
+			rplayer.playlist_repeat = 0;
+			rplayer.repeat(true);
+			$(this).attr('style','color:#900').attr('title',"Repeat OFF");
+			$('.ttp').tipsy({live: true,gravity:'s'});
+		} else {
+			//Toggle repeat off
+			rplayer.playlist_repeat = 0;
+			rplayer.repeat(false);
+			$(this).attr('style','color:#fff').attr('title',"Repeat playlist");
+			$('.ttp').tipsy({live: true,gravity:'s'});
 		}
+
 	});
 
 	/**
 	 * Share playlist with other users
 	 */
 	$(document).on('click',"#share_playlist",function(){
-		$("#share-link-content").html('<input type="text" value="'+window.document.location+'" class="form-control"/>');
+		var id = $("#share-link-content").data('list-id');
+		$("#share-link-content").html('<input type="text" value="'+window.location.origin+'/dashboard/#/share/'+id+'" class="form-control"/>');
 		$('.modal').modal();
 	});
 
@@ -327,6 +342,49 @@ $(window).ready(function(){
 		$("#rplayer_playlist").mCustomScrollbar();
 	}
 
+	/**
+	 * Mute audio
+	 */
+	$(document).on('click',"#rplayer-mute",function(){
+		rplayer.mute();
+	});
+
+	/**
+	 * Max audio
+	 */
+	$(document).on('click',"#rplayer-fullsound",function(){
+		rplayer.maxvol();
+	});
+
+	/**
+	 * Pause the song when watching on youtube
+	 */
+	$(document).on('click',".yt-watch-action",function(){
+		rplayer.pause();
+	});
+
+	/**
+	 * Move song to another playlist
+	 */
+	$(document).on('click','.move-to-playlist',function(){
+		var id = $(this).data('new-list-id');
+		var sid = $(this).data('song-id');
+		$.ajax({
+			url:baseurl+'application/change_song_playlist',
+			type:'POST',
+			data:{sid:sid,plid:id},
+			success:function(data){
+				if(data=="success"){
+					$("#watchdog").html("Your song has been moved to the this playlist. Please wait for it to reload.").fadeIn().delay(3000).fadeOut();
+					window.location = window.location.origin+'/dashboard/#/view/'+id;
+
+				}
+
+			}
+		});
+		return false;
+	});
+
 });
 
 	/* ANGULAR JS APPLICATION */
@@ -344,6 +402,10 @@ $(window).ready(function(){
 			controller:'playlistsController'
 		}).
 		when('/view/:playlistID',{
+			templateUrl:'/ngapp/partials/view_playlist.html',
+			controller:'viewplaylistController'
+		}).
+		when('/share/:playlistID',{
 			templateUrl:'/ngapp/partials/view_playlist.html',
 			controller:'viewplaylistController'
 		}).
