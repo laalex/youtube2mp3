@@ -131,7 +131,7 @@ $(window).ready(function(){
 					data = $.parseJSON(data);
 					if(data=='ok'){
 						$("#watchdog").html('Your song has been downloaded! Enjoy listening').fadeIn().delay(3000).fadeOut();
-						$(".expired-"+sid).removeClass('label-default').addClass('label-warning').html('Active');
+						$(".expired-"+sid).html('<span class="glyphicon glyphicon-ok-sign"></span>');
 						rplayer.playSong(song_url,song_name);
 					}
 				}
@@ -278,6 +278,8 @@ $(window).ready(function(){
 		//Get the current playlist entry id
 		var pos = $(this).data('playlist-pos');
 		rplayer.play_playlist(pos);
+		//Remove glyphicon-play and glyphicon-pause from "remvoe song"
+		$('.remove-song').removeClass("glyphicon-pause").removeClass("glyphicon-play");
 	});
 	/**
 	 * Show MP3 player playlist

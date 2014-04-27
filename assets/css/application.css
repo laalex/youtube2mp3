@@ -550,3 +550,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 }
 
 .mCSB_draggerContainer{margin-left: -5px;}
+
+#video-url-input{
+  font-family: 'Lato', 'sans-serif';
+  color:#09c;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  font-size:20px;
+  height:60px;
+}
