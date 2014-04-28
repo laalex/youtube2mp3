@@ -322,7 +322,7 @@ $(window).ready(function(){
 	$(document).on('click',"#share_playlist",function(){
 		var id = $("#share-link-content").data('list-id');
 		$("#share-link-content").html('<input type="text" value="'+window.location.origin+'/dashboard/#/share/'+id+'" class="form-control"/>');
-		$('.modal').modal();
+		$('#share-playlist').modal();
 	});
 
 	/** Function that populates the playlist */
