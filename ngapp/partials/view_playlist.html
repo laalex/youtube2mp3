@@ -2,7 +2,7 @@
           <div class="row" style="padding:0 !important;margin:0 !important;">
 	<div ng-if="GetSongCount() > 0" id="download_playlist" class="pull-left">
 		<a href="/dashboard/#/" class="" id="create-pack-download" data-playlist="{{playlist.list_id}}">
-			<span class="label label-success label-download-playlist ttp" title="Click to download an archive containing all the songs"><span class="glyphicon glyphicon-download"></span>&nbsp;DOWNLOAD "{{playlist.name}}"</span>
+			<span class="label label-success label-download-playlist ttp" title="Click to download an archive containing all the songs"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;DOWNLOAD "{{playlist.name}}"</span>
 		</a>
 			<span id="queue_playlist" data-list-id="{{playlist.list_id}}" class="label label-info label-download-playlist ttp" title="Click here to queue the entire playlist and listen to it"><span class="glyphicon glyphicon-headphones"></span>&nbsp;QUEUE PLAYLIST</span>
 
@@ -44,21 +44,26 @@
 					<span ng-if="song.is_downloaded == 0" title="The song will be downloaded again when you request it." class="ttp expired-{{song.song_id}}"><span class="glyphicon glyphicon-info-sign"></span></span>
 					<span ng-if="song.is_downloaded == 1" title="This song can be played and downloaded instantly" class="ttp"><span class="glyphicon glyphicon-ok-sign"></span></span>
 				</td>
-				<td style="100px;font-size:15px !important;">
+				<td style="font-size:15px; width:20px;!important;">
 					<a title="Listen now" style="width:100%;" data-url="{{song.direct_url}}" data-video-id="{{song.video_id}}" data-song-id="{{song.song_id}}" data-song-status="{{song.is_downloaded}}" data-song-name="{{song.nice_name}}" class="pointer listen-song-action ttp">
-				  		<span class="glyphicon glyphicon-headphones"></span>
+				  		<button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-headphones"></span> Listen</button>
 				  	</a>
 				</td>
-				<td style="font-size:15px;">
+				<td style="font-size:15px;width:20px;">
 					<a style="width:100%" class="song-download-action ttp" title="Download MP3" data-url="download/hash/{{song.download_url}}">
-				   		<span class="glyphicon glyphicon-download"></span>
+				   		<button class="btn btn-success btn-xs"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
 				   	</a>
 				</td>
-				<td style="font-size:15px;">
+				<td style="font-size:15px;width:20px;">
 					<a style="width:100%" class="song-queue-action ttp" title="Queue song" data-song-id="{{song.song_id}}">
-				   		<span class="glyphicon glyphicon-circle-arrow-right"></span>
+				   		<button class="btn btn-default btn-xs">Queue</button>
 				   	</a>
 				</td>
+                            <td style="font-size:15px;width:20px;">
+                                   <a style="width:100%" class="song-remove-action ttp" title="Remove song" data-song-id="{{song.song_id}}">
+                                          <button class="btn btn-default btn-xs"> Remove</button>
+                                   </a>
+                            </td>
 
 			</tr>
 		</table>

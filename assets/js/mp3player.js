@@ -19,7 +19,8 @@ window.rplayer.config = {
     play_button_div:null,
     song_title_div:null,
     volume_cursor_div:null,
-    volume_selected_div:null
+    volume_selected_div:null,
+    keyboard_shortcuts:true
 };
 
 /**
@@ -116,7 +117,6 @@ rplayer.volume = function(val){
             $("#"+rplayer.config.volume_selected_div).slider({"value":val});
             return val;
         }
-        return true;
     }
     return false;
 }
@@ -376,4 +376,69 @@ rplayer.populatePlaylist = function(array){
     //Append the playlist data t the playlist container
     $("#rplayer_playlist").html(playlist_data);
     $("#rplayer_playlist").mCustomScrollbar();
+}
+
+/**
+ * Keyboard shortcuts
+ */
+if(rplayer.config.keyboard_shortcuts){
+    /**
+     * Key event listeners
+     */
+    $(document).on('keypress',function(key){
+        var key_code = key.keyCode;
+        var shift = key.shiftKey;
+        console.log(key_code);
+        switch(key_code){
+            //shift + p - Play/Pause
+            case 80:
+                rplayer.togglePlayPause();
+                return false;
+            break;
+            //Shift - (Volume down)
+            case 95:
+                var vol = rplayer.volume();
+                if(vol - 0.1 >= 0) rplayer.volume(vol-0.1);
+                return false;
+            break;
+            //Shift + (Volume up)
+            case 43:
+                var vol = rplayer.volume();
+                if(vol + 0.1 <= 1) rplayer.volume(vol+0.1);
+                return false;
+            break;
+            //Shift + r (toggle repeat)
+            case 82:
+                var repeat = rplayer.repeat();
+                var repeat_playlist = rplayer.playlist_repeat;
+                if(repeat_playlist == 0 && repeat == false){
+                    //Toggle playlist repeat
+                    rplayer.repeat(false);
+                    rplayer.playlist_repeat = 1;
+                    $("#repeat_button").attr('style','color:#09f').attr('title',"Toggle one repeat");
+                    $('.ttp').tipsy({live: true,gravity:'s'});
+                } else if(repeat_playlist  == 1 && repeat == false){
+                    //Toggle one repeat
+                    rplayer.playlist_repeat = 0;
+                    rplayer.repeat(true);
+                    $("#repeat_button").attr('style','color:#900').attr('title',"Repeat OFF");
+                    $('.ttp').tipsy({live: true,gravity:'s'});
+                } else {
+                    //Toggle repeat off
+                    rplayer.playlist_repeat = 0;
+                    rplayer.repeat(false);
+                    $("#repeat_button").attr('style','color:#fff').attr('title',"Repeat playlist");
+                    $('.ttp').tipsy({live: true,gravity:'s'});
+                }
+                return false;
+            break;
+            //Shift + L (Load playlist)
+            case 76:
+                if(window.location.hash.search("view") !== -1){
+                    //Load the current playlist in view
+                    $("#queue_playlist").trigger('click');
+                }
+            break;
+        }
+    });
 }

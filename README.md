@@ -1,6 +1,6 @@
 ## ZONGLIST web application
 
-`Version 1.0`
+`Version 1.0.1`
 
 Application works on _linux_ environment (tested on `ubuntu 12.04LTS server`). Requires the following things on the server in order to run:
 
@@ -21,15 +21,19 @@ Application works on _linux_ environment (tested on `ubuntu 12.04LTS server`). R
 8. Androi mobile application compatible with > 4.1.1 Android
 9. Search directly on YouTube to download a song
 10. Continous playlist listening
+11. Ability to remove songs
+12. Keyboard shortcuts*
 
+## Features partially supported
+
+* Keyboard shortcuts
 
 ## Known bugs and issues
 
-1. Songs cannot be removed
-2. PlayList pages are updated every `5` seconds by polling the server.
-3. Songs are being downloaded even if the ID is not unique
-4. PlayList don't automatically load songs when they are expired
-5. Application state inflicts an error to the REPEAT and causes the player to automatically repeat.
+1. PlayList pages are updated every `5` seconds by polling the server.
+2. Songs are being downloaded even if the ID is not unique
+3. PlayList don't automatically load songs when they are expired
+4. Application state inflicts an error to the REPEAT and causes the player to automatically repeat.
 
 ## Upcoming features
 
@@ -39,11 +43,18 @@ Application works on _linux_ environment (tested on `ubuntu 12.04LTS server`). R
 
 
 ### Changelog
+
+`V 1.0.1`
+
+* Updated playlist interface
+* Added song remove
+* Added MP3 player keyboard shortcuts
+
 `V 1.0`
 
 * Fixed 12 bugs uppon release
 * Added Playlists
 * Added playlist change within the playlist view controller
 * Added playlost repeat, one repeat, repeat none to the MP3 player
-* Improved MP3 player response 
+* Improved MP3 player response
 * Improved UX/UI

@@ -56,6 +56,32 @@
 	  	<br /><br />
 	  </li>
 	</ol>
+
+	<!-- MODAL -->
+	<!-- SHARE PLAYLSIT MODAL -->
+	<div class="modal fade" id="kbd-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">MP3 Player - Keyboad Shortcuts</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<code>SHIFT + "P"</code> - Toggle play/pause <br />
+	      		<code>SHIFT + "-"</code> - Volume down <br />
+	      		<code>SHIFT + "+"</code> - Volume up <br />
+	      		<code>SHIFT + "R"</code> - Toggle repeat playlist, repeat one, repeat none<br />
+	      		<code>SHIFT + "L"</code> - Loads a playlist if you are viewing one
+	      		<hr />
+	      		<i>Player controls are only tested on Chrome browser. They might not work on other browsers</i>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<!-- SCRIPTS -->
 	<script type="text/javascript">
 		var baseurl = "<?php print base_url(); ?>index.php/";

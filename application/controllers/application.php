@@ -93,4 +93,9 @@ class application extends CI_Controller{
 		$this->application_model->change_song_playlist();
 	}
 
+	/** Remove song */
+	public function remove_song($id){
+		$this->application_model->remove_song($id);
+	}
+
 }

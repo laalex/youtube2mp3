@@ -298,19 +298,19 @@ $(window).ready(function(){
 			//Toggle playlist repeat
 			rplayer.repeat(false);
 			rplayer.playlist_repeat = 1;
-			$(this).attr('style','color:#09f').attr('title',"Toggle one repeat");
+			$("#repeat_button").attr('style','color:#09f').attr('title',"Toggle one repeat");
 			$('.ttp').tipsy({live: true,gravity:'s'});
 		} else if(repeat_playlist  == 1 && repeat == false){
 			//Toggle one repeat
 			rplayer.playlist_repeat = 0;
 			rplayer.repeat(true);
-			$(this).attr('style','color:#900').attr('title',"Repeat OFF");
+			$("#repeat_button").attr('style','color:#900').attr('title',"Repeat OFF");
 			$('.ttp').tipsy({live: true,gravity:'s'});
 		} else {
 			//Toggle repeat off
 			rplayer.playlist_repeat = 0;
 			rplayer.repeat(false);
-			$(this).attr('style','color:#fff').attr('title',"Repeat playlist");
+			$("#repeat_button").attr('style','color:#fff').attr('title',"Repeat playlist");
 			$('.ttp').tipsy({live: true,gravity:'s'});
 		}
 
@@ -383,6 +383,28 @@ $(window).ready(function(){
 			}
 		});
 		return false;
+	});
+
+	/**
+	 * Song remove action
+	 */
+	$(document).on('click','.song-remove-action',function(){
+		var s_id = $(this).data('song-id');
+		$("#watchdog").html("Your song is being removed...").fadeIn();
+		$.ajax({
+			url:baseurl+'application/remove_song/'+s_id,
+			type:'POST',
+			success:function(data){
+				$("#watchdog").html("Song has been removed!").delay(3000).fadeOut();
+			}
+		})
+	});
+
+	/**
+	 * Show the keyboard shorcuts to the user
+	 */
+	$(document).on('click',"#kbd-shortcuts",function(){
+		$("#kbd-modal").modal();
 	});
 
 });

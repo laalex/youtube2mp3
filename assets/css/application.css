@@ -612,3 +612,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
   font-weight: normal;
   cursor: pointer;
 }
+
+#video-download-response {
+  background: #fff;
+  box-shadow: 0 0 5px #ddd;
+}

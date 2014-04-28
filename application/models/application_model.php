@@ -274,4 +274,18 @@ class application_model extends CI_Model{
 			print 'success';
 		endif;
 	}
+
+	/**
+	 * Remove song from playlist
+	 */
+	public function remove_song($id){
+		//Get the song details from the database
+		$uid = $this->session->userdata('user_id');
+		$song = $this->db->where(array('user_id'=>$uid,'song_id'=>$id))->get('songs')->first_row();
+		//Remove the song from the user folder
+		@unlink('downloads/'.$uid.'/'.$song->song_name);
+		//Remove the song from the database
+		$this->db->where(array('user_id'=>$uid,'song_id'=>$id))->delete('songs');
+		print 'success';
+	}
 }
