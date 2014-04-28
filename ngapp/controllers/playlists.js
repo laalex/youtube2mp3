@@ -5,7 +5,7 @@ zonglistControllers.controller("playlistsController",['$scope', '$http',
 		$http.get(baseurl+'playlists/getPlaylists').success(function(data){
 			$scope.playlists = data;
 		});
-		
+
 
 		//Get playlist counts
 		$scope.playlistsCount = function(){
@@ -35,7 +35,7 @@ zonglistControllers.controller("playlistsController",['$scope', '$http',
 					});
 				});
 			}
-			
+
 		}
 
 		//Remove a playlist from the application

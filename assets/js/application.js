@@ -577,8 +577,6 @@ $(window).load(function(){
 	/**
 	 * Other scripts
 	 */
-	/** Tipsy */
-	$('.ttp').tipsy({live: true,gravity:'s'});
 
 	//Finished loading
 	$("#app_loading").fadeOut();
