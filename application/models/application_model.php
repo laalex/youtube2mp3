@@ -57,8 +57,8 @@ class application_model extends CI_Model{
 	 * Get playlist songs by playlist id
 	 */
 	public function get_playlist_songs($id){
-		$uid = $this->session->userdata('user_id');
-		$return = $this->db->from('songs')->where(array('user_id'=>$uid,'list_id'=>$id))->get()->result();
+		//$uid = $this->session->userdata('user_id');
+		$return = $this->db->from('songs')->where(array('list_id'=>$id))->get()->result();
 		foreach($return as &$s):
 			$s->direct_url = base_url().'downloads/'.$s->user_id.'/'.$s->song_name;
 			$s->nice_name = str_replace('-'.$s->video_id,'',$s->song_name);
