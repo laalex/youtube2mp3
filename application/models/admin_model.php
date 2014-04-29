@@ -13,7 +13,7 @@ class admin_model extends CI_Model{
         */
        public function song_data(){
               $return['count'] = $this->db->count_all('songs');
-              $return['active'] = $this->db->where('is_downloaded',1)->count_all('songs');
+              $return['active'] = $this->db->where('is_downloaded',1)->count_all_results('songs');
               return $return;
        }
 
