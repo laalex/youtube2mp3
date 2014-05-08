@@ -43,12 +43,16 @@ class download extends CI_Controller{
 					endif;
 					$file = 'downloads/'.$uid.'/'.$data->song_name;
 					//If the file is requested, then go to the file directly
-					if($file_request == "true") { header("Location ".base_url().$file);}
+					header("Content-Type: " . mime_content_type($file));
+					header("Content-Length: " . filesize($file));
+					$file_name = pathinfo($file);
+					header("Content-Disposition: attachment; filename=\"" . $file_name['basename'] . "\"");
 					header("Content-Type: application/octet-stream");
-					header("Content-Transfer-Encoding: Binary");
-					header ("Content-disposition: attachment; filename=".$file);
-					header("Content-Length: ".filesize($file));
-					readfile($file);
+					header("Content-Transfer-Encoding: binary");
+
+					if ($fp=fopen($file, "r")){
+					    fpassthru($fp);
+					}
 					exit;
 				else:
 					exit('No music for you. This is not yours.');
