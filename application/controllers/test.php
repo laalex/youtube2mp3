@@ -4,12 +4,12 @@
 
 		public function __construct(){
 			parent::__construct();
-			$this->load->helper('youtubedl');
 		}
 
 
 		public function index(){
-			$this->load->view('tests/youtube');
+			$this->load->database();
+                     var_dump($this->db->get('users')->result());
 		}
 
 	}
