@@ -43,7 +43,7 @@ class download extends CI_Controller{
 					endif;
 					$file = 'downloads/'.$uid.'/'.$data->song_name;
 					//If the file is requested, then go to the file directly
-					if($file_request == "true") { exit("error"); header("Location ".base_url().$file);}
+					if($file_request == "true") { header("Location ".base_url().$file);}
 					header ("Content-type: octet/stream");
 					header ("Content-disposition: attachment; filename=".$file);
 					header("Content-Length: ".filesize($file));
