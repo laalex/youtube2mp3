@@ -4,7 +4,8 @@ class download extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-		if(!$this->uri->segment(4)=="MOBILE_ALLOWED_FROM"):
+		$s4 = $this->uri->segment(4,false);
+		if($s4 != "MOBILE_ALLOWED_FROM"):
 			//Check if user is logged in
 			if(!$this->ion_auth->logged_in()):
 				//The user is logged in -> Redirect to the application
